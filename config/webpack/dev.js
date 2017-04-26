@@ -1,10 +1,17 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
+
   entry: {
-    main: './src/client.js',
+    app: [
+      'react-dev-utils/webpackHotDevClient',
+      'react-hot-loader/patch',
+      './src/client.js'
+    ],
   },
 
   output: {
@@ -28,6 +35,11 @@ module.exports = {
       name: 'manifest'
     }),
     new ExtractTextPlugin('styles.css'),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: './base.html',
+      filename: 'index.html',
+    }),
   ],
 
   module: {
@@ -35,7 +47,9 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: [
+          'babel-loader'
+        ],
       },
       {
         test: /\.less/,

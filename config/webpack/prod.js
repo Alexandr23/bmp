@@ -28,6 +28,11 @@ module.exports = {
       name: 'manifest'
     }),
     new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
   ],
 
   module: {
