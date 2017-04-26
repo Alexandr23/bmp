@@ -1,5 +1,6 @@
 import App from '../containers/App';
 import About from '../containers/About';
+import Counter from '../containers/Counter';
 
 export default {
   childRoutes: [{
@@ -9,6 +10,10 @@ export default {
       {
         path: 'about',
         component: About,
+      },
+      {
+        path: 'counter',
+        component: Counter,
       }
     ],
   }],

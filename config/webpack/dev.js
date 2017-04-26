@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -34,10 +33,6 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest'
     }),
-    /*new ExtractTextPlugin({
-      filename: '[name].min.css?hash=[hash]',
-      allChunks: true,
-    }),*/
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './base.html',

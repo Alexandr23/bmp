@@ -1,6 +1,6 @@
 import React, {PureComponent, PropTypes} from 'react';
 import Helmet from 'react-helmet';
-import Header from '../../components/Header';
+import Layout from '../../components/Layout';
 
 
 export default class App extends PureComponent {
@@ -12,8 +12,7 @@ export default class App extends PureComponent {
     return (
       <div>
         <Helmet defaultTitle="Big Market Place" titleTemplate="%s | Big Market Place" />
-        <Header />
-        {this.props.children}
+        <Layout>{this.props.children}</Layout>
       </div>
     );
   }

@@ -6,8 +6,11 @@ class Header extends Component {
   render () {
     return (
       <div className="header header_bg">
-        <Link className="header__link" to="/">Big Market Place</Link>
-        <Link className="header__link header__link_right" to="/about">About</Link>
+        <div className="inner">
+          <Link className="link link_left" to="/">Big Market Place</Link>
+          <Link className="link link_right" to="/about">About</Link>
+          <Link className="link link_right" to="/counter">Counter</Link>
+        </div>
       </div>
     );
   }
