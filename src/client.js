@@ -22,17 +22,9 @@ const render = (Component) => {
 
 
 render(Root);
-// Hot Module Replacement
+
+
 if (module.hot) {
-  module.hot.accept('./root', () => {
-    const NewRoot = require('./root').default;
-
-    document.querySelectorAll('link[href][rel=stylesheet]').forEach((link) => {
-      const nextStyleHref = link.href.replace(/(\?\d+)?$/, `?${Date.now()}`);
-      link.href = nextStyleHref;
-    });
-
-    render(NewRoot);
-  });
+  module.hot.accept('./root', () => {render(Root);});
 }
 

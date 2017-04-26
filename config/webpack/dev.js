@@ -34,7 +34,10 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest'
     }),
-    new ExtractTextPlugin('styles.css'),
+    /*new ExtractTextPlugin({
+      filename: '[name].min.css?hash=[hash]',
+      allChunks: true,
+    }),*/
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './base.html',
@@ -54,15 +57,11 @@ module.exports = {
       {
         test: /\.less/,
         exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: [{
-            loader: 'style-loader',
-          }],
-          use: [
-            'css-loader',
-            'less-loader'
-          ],
-        }),
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ],
       }
     ]
   }
