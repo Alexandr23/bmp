@@ -1,7 +1,8 @@
-import React, {PureComponent, PropTypes} from 'react';
+import * as React from 'react';
+const {PureComponent, PropTypes} = React;
 
 
-export default class About extends PureComponent {
+export default class About extends PureComponent<any, any> {
   static propTypes = {
     children: PropTypes.any,
   };

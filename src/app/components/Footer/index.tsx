@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+const {PureComponent} = React;
 import './style.less';
 
-class Footer extends Component {
+class Footer extends PureComponent<any, any> {
   render () {
     return (
       <div className="footer">

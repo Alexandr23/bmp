@@ -1,9 +1,10 @@
-import React, {PureComponent, PropTypes} from 'react';
+import * as React from 'react';
+const {PureComponent, PropTypes} = React;
 import Helmet from 'react-helmet';
 import Layout from '../../components/Layout';
 
 
-export default class App extends PureComponent {
+export default class App extends PureComponent<any, any> {
   static propTypes = {
     children: PropTypes.any,
   };

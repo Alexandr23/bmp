@@ -7,7 +7,7 @@ import rootReducer from '../reducers';
 
 const logger = createLogger();
 
-const configureStore = (preloadedState) => {
+const configureStore = (preloadedState: any) => {
   return createStore(
     rootReducer,
     preloadedState,

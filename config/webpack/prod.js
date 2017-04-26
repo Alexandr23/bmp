@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './src/client.js',
+    main: './src/client.tsx',
   },
 
   output: {
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     modules: [path.resolve(__dirname), 'node_modules'],
   },
 
@@ -38,9 +38,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: 'ts-loader',
       },
       {
         test: /\.less/,

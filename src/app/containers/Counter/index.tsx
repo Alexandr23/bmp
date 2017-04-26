@@ -1,18 +1,15 @@
-import React, {PureComponent, PropTypes} from 'react';
+import * as React from 'react';
+const {PureComponent, PropTypes} = React;
 
 
-class Counter extends PureComponent {
+class Counter extends PureComponent<any, any> {
   static propTypes = {
     children: PropTypes.any,
   };
 
-  constructor (props, state) {
-    super(props, state);
-
-    this.state = {
-      counter: 0,
-    }
-  }
+  static state = {
+    counter: 0,
+  };
 
   decrement = () => {
     this.setState({

@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+const {PureComponent} = React;
 import {Link} from 'react-router';
 import './style.less';
 
-class Header extends Component {
+class Header extends PureComponent<any, any> {
   render () {
     return (
       <div className="header header_bg">

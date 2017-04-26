@@ -24,7 +24,7 @@ new WebpackDevServer(webpack(config), {
     chunkModules: false,
     children: false,
   },
-}).listen(3000, '0.0.0.0', (err) => {
+}).listen(3000, '0.0.0.0', (err: any) => {
   if (err) {
     console.log(err);
   }

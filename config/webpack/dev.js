@@ -3,13 +3,13 @@ var path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   entry: {
     app: [
       'react-dev-utils/webpackHotDevClient',
       'react-hot-loader/patch',
-      './src/client.js'
+      './src/client.tsx'
     ],
   },
 
@@ -19,7 +19,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     modules: [path.resolve(__dirname), 'node_modules'],
   },
 
@@ -43,11 +43,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader'
-        ],
+        use: 'ts-loader',
       },
       {
         test: /\.less/,

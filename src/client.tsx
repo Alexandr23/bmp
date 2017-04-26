@@ -11,7 +11,7 @@ import './app/styles/main.less';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
-const render = (Component) => {
+const render = (Component: any) => {
   ReactDOM.render(
     <AppContainer>
       <Component history={history} routes={routes} store={store} />
