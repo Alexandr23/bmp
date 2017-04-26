@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const fs = require('fs');
 const path = require('path');
-const config = require('../../webpack.config');
+const config = require('../webpack.config');
 
 // const proxy = fs.statSync(path.join(__dirname, './local/server.proxy.local.js')).isFile()? require('./local/server.proxy.local') : {};
 
