@@ -9,7 +9,7 @@ import configureStore from './app/redux/store';
 import './app/styles/main.less';
 
 
-const store = configureStore();
+const store = configureStore(browserHistory, window.__INITIAL_STATE__);
 const history = syncHistoryWithStore(browserHistory, store);
 const render = (Component: any) => {
   ReactDOM.render(
@@ -22,9 +22,7 @@ const render = (Component: any) => {
 
 
 render(Root);
-
-
-if (module.hot) {
-  module.hot.accept('./root', () => {render(Root);});
+if ((module as any).hot) {
+    (module as any).hot.accept('./root', () => {render(Root);});
 }
 

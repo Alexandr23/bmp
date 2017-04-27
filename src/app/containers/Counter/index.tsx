@@ -1,13 +1,9 @@
 import * as React from 'react';
-const {PureComponent, PropTypes} = React;
+const {PureComponent} = React;
 
 
 class Counter extends PureComponent<any, any> {
-  static propTypes = {
-    children: PropTypes.any,
-  };
-
-  static state = {
+  public state = {
     counter: 0,
   };
 
@@ -23,7 +19,7 @@ class Counter extends PureComponent<any, any> {
     })
   };
 
-  render() {
+  public render() {
     return (
       <div>
         <h1>Counter page</h1>
