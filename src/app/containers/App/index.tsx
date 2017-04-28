@@ -12,7 +12,7 @@ export default class App extends PureComponent<any, any> {
   render() {
     return (
       <div>
-        <Helmet defaultTitle="Big Market Place" titleTemplate="%s | Big Market Place" />
+        <Helmet defaultTitle="Big Market Place" titleTemplate="%s | Big Market Place"/>
         <Layout>{this.props.children}</Layout>
       </div>
     );

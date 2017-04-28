@@ -43,8 +43,15 @@ module.exports = {
         use: 'ts-loader',
       },
       {
-        test: /\.less/,
-        exclude: /node_modules/,
+        test: /\.css$/,
+        include: path.resolve('./src/app'),
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
         use: ExtractTextPlugin.extract({
           fallback: [{
             loader: 'style-loader',
@@ -54,7 +61,15 @@ module.exports = {
             'less-loader'
           ],
         }),
-      }
+      },
+      {
+        test: /\.ttf(\?.*)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=fonts/[hash].[ext]'
+      },
+      {
+        test: /\.(ttf|eot|woff2?)(\?[a-z0-9]+)?$/,
+        use: 'file-loader?name=font/[name]-[hash].[ext]',
+      },
     ]
   }
 };

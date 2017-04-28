@@ -1,6 +1,6 @@
 import * as React from 'react';
 const {PureComponent, PropTypes} = React;
-import Table from '../../components/Table';
+import Catalog from '../../components/Catalog';
 
 
 export default class About extends PureComponent<any, any> {
@@ -12,7 +12,7 @@ export default class About extends PureComponent<any, any> {
     return (
       <div>
         <h1>About page</h1>
-        <Table />
+        <Catalog />
       </div>
     );
   }
