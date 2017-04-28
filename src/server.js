@@ -1,6 +1,3 @@
-/* eslint "import/no-extraneous-dependencies": "off" */
-/* eslint "no-console": "off" */
-
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const fs = require('fs');

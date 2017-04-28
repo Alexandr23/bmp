@@ -2,10 +2,22 @@ import * as React from 'react';
 const {PureComponent} = React;
 
 
-class Counter extends PureComponent<any, any> {
-  public state = {
-    counter: 0,
-  };
+interface IProps {
+
+}
+interface IState {
+  counter: number;
+}
+
+
+class Counter extends PureComponent<IProps, IState> {
+  constructor (props: IProps) {
+    super(props);
+
+    this.state = {
+      counter: 0,
+    };
+  }
 
   decrement = () => {
     this.setState({
