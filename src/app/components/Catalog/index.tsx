@@ -1,6 +1,6 @@
 import * as React from 'react';
 const { PureComponent } = React;
-import { Table as AntTable, DatePicker, LocaleProvider } from 'antd';
+import { Table, DatePicker, LocaleProvider } from 'antd';
 import * as ruRU from 'antd/lib/locale-provider/ru_RU';
 import { PaginationProps } from 'antd/lib/pagination';
 import 'antd/lib/table/style';
@@ -9,7 +9,7 @@ import { columns, dataSource, IData } from './data';
 import './style.less';
 
 
-class CatalogTable extends AntTable<IData> {}
+class CatalogTable extends Table<IData> {}
 class Catalog extends PureComponent<any, any> {
   public render () {
     const pagination:PaginationProps = {
