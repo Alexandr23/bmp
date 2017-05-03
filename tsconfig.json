@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/*",
+        "src/app/*",
+        "src/app/redux/*"
+      ]
+    },
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,

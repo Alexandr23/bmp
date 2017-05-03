@@ -1,39 +1,44 @@
 import * as React from 'react';
-const { PureComponent } = React;
+const {PureComponent} = React;
 import {connect} from 'react-redux';
-import {categoryGetList} from '../../redux/modules/category';
-import { Table, LocaleProvider } from 'antd';
-import * as ruRU from 'antd/lib/locale-provider/ru_RU';
-import { PaginationProps } from 'antd/lib/pagination';
+import {catalogGet} from 'redux/modules/catalog';
+import {ICatalog, ICatalogState} from 'models/catalog';
+import {IStore} from "models/store";
+import {Table} from 'antd';
+import {PaginationProps} from 'antd/lib/pagination';
+import {columns} from './columns';
 import 'antd/lib/table/style';
-import { columns, dataSource, IData } from './data';
 import './style.less';
 
 
-class CatalogTable extends Table<IData> {}
-class Catalog extends PureComponent<any, any> {
+interface IProps {
+  catalogGet: any;
+  catalog: ICatalogState;
+}
+class CatalogTable extends Table<ICatalog> {}
+
+
+class Catalog extends PureComponent<IProps, null> {
   public render () {
-    const {list} = this.props.category;
+    const {list} = this.props.catalog;
     const pagination:PaginationProps = {
-      total: dataSource.length,
+      total: list.length,
       pageSize: 20,
       showSizeChanger: true,
-      pageSizeOptions: ['5', '10', '15', '20', '50', '100'],
+      pageSizeOptions: ['20', '50', '100', '200', '500', '1000', '5000'],
     };
 
     return (
-      <LocaleProvider locale={ruRU}>
-        <div className="table">
-          <CatalogTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
-          <button onClick={this.props.categoryGetList}>Загрузить список категорий</button>
-        </div>
-      </LocaleProvider>
+      <div className="table">
+        <CatalogTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
+        <button onClick={this.props.catalogGet}>Загрузить список категорий</button>
+      </div>
     );
   }
 }
 
 
-const mapStateToProps = (state: any) => ({
-  category: state.category,
+const mapStateToProps = (state: IStore) => ({
+  catalog: state.catalog,
 });
-export default connect(mapStateToProps, {categoryGetList})(Catalog);
+export default connect(mapStateToProps, {catalogGet})(Catalog);

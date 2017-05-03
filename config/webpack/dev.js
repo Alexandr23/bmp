@@ -20,7 +20,7 @@ module.exports = {
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    modules: [path.resolve(__dirname), 'node_modules'],
+    modules: [path.resolve(__dirname), 'node_modules', 'app', 'app/redux'],
   },
 
   plugins: [
