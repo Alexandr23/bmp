@@ -1,7 +1,7 @@
 import * as React from 'react';
 const {PureComponent, PropTypes} = React;
 import Helmet from 'react-helmet';
-import Layout from '../../components/Layout';
+import LayoutAdmin from '../../components/LayoutAdmin';
 
 
 export default class App extends PureComponent<any, any> {
@@ -13,7 +13,7 @@ export default class App extends PureComponent<any, any> {
     return (
       <div>
         <Helmet defaultTitle="Big Market Place" titleTemplate="%s | Big Market Place"/>
-        <Layout>{this.props.children}</Layout>
+        <LayoutAdmin>{this.props.children}</LayoutAdmin>
       </div>
     );
   }
