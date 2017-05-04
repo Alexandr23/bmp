@@ -1,20 +1,22 @@
 import * as React from 'react';
-const {PureComponent, PropTypes} = React;
+const {PureComponent} = React;
 import Helmet from 'react-helmet';
-import LayoutAdmin from '../../components/LayoutAdmin';
 
 
-export default class App extends PureComponent<any, any> {
-  static propTypes = {
-    children: PropTypes.any,
-  };
+interface IProps {
+  children: any;
+}
 
+
+class App extends PureComponent<IProps, null> {
   render() {
     return (
       <div>
         <Helmet defaultTitle="Big Market Place" titleTemplate="%s | Big Market Place"/>
-        <LayoutAdmin>{this.props.children}</LayoutAdmin>
+        {this.props.children}
       </div>
     );
   }
 }
+
+export default App;

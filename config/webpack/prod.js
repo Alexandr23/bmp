@@ -52,14 +52,20 @@ module.exports = {
       },
       {
         test: /\.less$/,
+        exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
-          fallback: [{
-            loader: 'style-loader',
-          }],
+          fallback: "style-loader",
           use: [
-            'css-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[local]__[hash:base64:5]'
+              }
+            },
             'less-loader'
           ],
+          publicPath: "/dist",
         }),
       },
       {
@@ -69,6 +75,10 @@ module.exports = {
       {
         test: /\.(ttf|eot|woff2?)(\?[a-z0-9]+)?$/,
         use: 'file-loader?name=font/[name]-[hash].[ext]',
+      },
+      {
+        test: /\.(jpe?g|png|svg|gif)$/i,
+        use: ['url-loader?limit=5000&name=img/[name].[ext]'],
       },
     ]
   }

@@ -4,13 +4,15 @@ import {browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {AppContainer} from 'react-hot-loader';
 import Root from './root';
-import routes from './app/routes';
+import configureRoutes from './app/routes';
 import configureStore from './app/redux/store';
 import './app/styles/main.less';
 
 
 const store = configureStore(browserHistory, window.__INITIAL_STATE__);
 const history = syncHistoryWithStore(browserHistory, store);
+const routes = configureRoutes(store);
+
 const render = (Component: any) => {
   ReactDOM.render(
     <AppContainer>

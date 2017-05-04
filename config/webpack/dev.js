@@ -57,9 +57,25 @@ module.exports = {
       },
       {
         test: /\.less$/,
+        include: /node_modules/,
         use: [
           'style-loader',
           'css-loader',
+          'less-loader'
+        ],
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
+          },
           'less-loader'
         ],
       },
@@ -70,6 +86,10 @@ module.exports = {
       {
         test: /\.(ttf|eot|woff2?)(\?[a-z0-9]+)?$/,
         use: 'file-loader?name=font/[name]-[hash].[ext]',
+      },
+      {
+        test: /\.(jpe?g|png|svg|gif)$/i,
+        use: ['url-loader?limit=5000&name=img/[name].[ext]'],
       },
     ]
   }

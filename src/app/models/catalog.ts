@@ -7,7 +7,7 @@ export interface ICatalog {
   id: number;
   title: string;
   url: string;
-  thumbnailUrk: string;
+  thumbnailUrl: string;
   key?: string;
 }
 

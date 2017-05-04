@@ -1,9 +1,8 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {connect} from 'react-redux';
-import {catalogGet} from 'redux/modules/catalog';
 import {ICatalog, ICatalogState} from 'models/catalog';
-import {IStore} from "models/store";
+import {IState} from "models/store";
 import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
 import {columns} from './columns';
@@ -12,7 +11,6 @@ import './style.less';
 
 
 interface IProps {
-  catalogGet: any;
   catalog: ICatalogState;
 }
 class CatalogTable extends Table<ICatalog> {}
@@ -31,14 +29,13 @@ class Catalog extends PureComponent<IProps, null> {
     return (
       <div className="table">
         <CatalogTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
-        <button onClick={this.props.catalogGet}>Загрузить список категорий</button>
       </div>
     );
   }
 }
 
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: IState) => ({
   catalog: state.catalog,
 });
-export default connect(mapStateToProps, {catalogGet})(Catalog);
+export default connect(mapStateToProps, {})(Catalog);
