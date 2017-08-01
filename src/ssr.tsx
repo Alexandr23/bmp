@@ -12,7 +12,7 @@ import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 const { ReduxAsyncConnect, loadOnServer } = require('redux-connect');
 import configureStore from './app/redux/store';
-import configurRoutes from './app/routes';
+import configureRoutes from './app/routes';
 
 import Html from './app/containers/Html';
 //const manifest = require('../dist/manifest.json');
@@ -45,7 +45,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(require('webpack-hot-middleware')(webpackCompiler));
 }
 //app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '')));
 
 
 
@@ -55,11 +55,11 @@ app.get('*', (req: any, res: any) => {
   const store = configureStore(memoryHistory, {});
   const history = syncHistoryWithStore(memoryHistory, store);
 
-  match({ history, routes: configurRoutes(store), location },
+  match({ history, routes: configureRoutes(store), location },
     (error, redirectLocation, renderProps) => {
-    console.log(error);
-    console.log(redirectLocation);
-    console.log(renderProps);
+    console.log('error ___ ', error);
+    console.log('redirectLocation ___ ', redirectLocation);
+    //console.log('renderProps', renderProps);
 
       if (error) {
         res.status(500).send(error.message);
@@ -94,7 +94,7 @@ app.listen(appConfig.port, appConfig.host, (err: any) => {
 
 function renderHTML(markup: string, store: any) {
   const html = ReactDOMServer.renderToString(
-    <Html markup={markup} manifest={{asd: 'asd'}} store={store} />,
+    <Html markup={markup} manifest={{manifest: 'manifest'}} store={store} />,
   );
 
   return `<!doctype html> ${html}`;

@@ -5,7 +5,7 @@ import {Layout, Menu, Breadcrumb, Icon} from 'antd';
 const {SubMenu} = Menu;
 const {Header, Footer, Content, Sider} = Layout;
 import {LocaleProvider} from 'antd';
-import * as ruRU from 'antd/lib/locale-provider/ru_RU';
+import ruRU from 'antd/lib/locale-provider/ru_RU';
 import 'antd/dist/antd.less';
 
 const style = require('./style.less');

@@ -10,21 +10,25 @@ interface IHtmlProps {
 class Html extends React.Component<IHtmlProps, {}> {
   private resolve(files: any) {
     return files.map((src: any) => {
-      if (!this.props.manifest[src]) { return; }
-      return '/public/' + this.props.manifest[src];
+      //if (!this.props.manifest[src]) { return; }
+      return '/' + src;
     }).filter((file: any) => file !== undefined);
   }
 
   public render() {
-    const head = Helmet.rewind();
+    //const head = Helmet.rewind();
     const { markup, store } = this.props;
 
-    const styles = this.resolve(['vendor.css', 'app.css']);
+    const styles = this.resolve(['styles.css']);
     const renderStyles = styles.map((src: any, i: any) =>
       <link key={i} rel="stylesheet" type="text/css" href={src} />,
     );
 
-    const scripts = this.resolve(['vendor.js', 'app.js']);
+    const scripts = this.resolve(['manifest.js', 'vendor.js', 'app.js']);
+
+    console.log(styles.length);
+    console.log(scripts.length);
+
     const renderScripts = scripts.map((src: any, i: any) =>
       <script src={src} key={i} />,
     );
@@ -35,12 +39,6 @@ class Html extends React.Component<IHtmlProps, {}> {
     return (
       <html>
       <head>
-        {head.base.toComponent()}
-        {head.title.toComponent()}
-        {head.meta.toComponent()}
-        {head.link.toComponent()}
-        {head.script.toComponent()}
-
         {renderStyles}
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
