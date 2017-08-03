@@ -52,10 +52,10 @@ export function CatalogReducer (state = INITIAL_STATE, action: ICatalogAction) {
 
 
 /** Action Creators */
-export const catalogGet = () => {
+export const catalogGet = (params: Object) => {
   return (dispatch: any) => {
     dispatch(catalogGetRequest());
-    apiCatalog.getCatalog()
+    apiCatalog.getCatalog(params)
       .then((response: AxiosResponse) => dispatch((catalogGetSuccess)(response)))
       .catch((error: AxiosError) => dispatch((catalogGetFailure)(error)));
   };

@@ -13,22 +13,22 @@ import './style.less';
 interface IProps {
   catalog: ICatalogState;
 }
-class CatalogTable extends Table<ICatalog> {}
+class CategoryTable extends Table<ICatalog> {}
 
 
-class Catalog extends PureComponent<IProps, null> {
+class CategoryList extends PureComponent<IProps, null> {
   public render () {
     const {list} = this.props.catalog;
     const pagination:PaginationProps = {
       total: list.length,
-      pageSize: 20,
+      pageSize: 10,
       showSizeChanger: true,
-      pageSizeOptions: ['20', '50', '100', '200', '500', '1000', '5000'],
+      pageSizeOptions: ['10', '20', '50', '100'],
     };
 
     return (
       <div className="table">
-        <CatalogTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
+        <CategoryTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
       </div>
     );
   }
@@ -38,4 +38,4 @@ class Catalog extends PureComponent<IProps, null> {
 const mapStateToProps = (state: IState) => ({
   catalog: state.catalog,
 });
-export default connect(mapStateToProps, {})(Catalog);
+export default connect(mapStateToProps, {})(CategoryList);

@@ -1,16 +1,17 @@
 import * as React from 'react';
 const {PureComponent} = React;
-import {Link} from 'react-router';
-import {Layout, Menu, Breadcrumb, Icon} from 'antd';
-const {SubMenu} = Menu;
-const {Header, Footer, Content, Sider} = Layout;
-import {LocaleProvider} from 'antd';
+
+/* AntDesign */
+import {Layout, LocaleProvider} from 'antd';
+const {Header, Footer, Sider} = Layout;
 import ruRU from 'antd/lib/locale-provider/ru_RU';
 import 'antd/dist/antd.less';
+import MenuAdmin from '../MenuAdmin';
 
+/* Styles */
 const style = require('./style.less');
 const classNames = require('classnames/bind');
-const cx = classNames.bind(style);
+export const cx = classNames.bind(style);
 
 
 class LayoutAdmin extends PureComponent<any, any> {
@@ -24,33 +25,11 @@ class LayoutAdmin extends PureComponent<any, any> {
 
           <Layout>
             <Sider className={cx('sider')}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                className={cx('menu')}
-              >
-                <SubMenu key="sub1" title={<span><Icon type="appstore-o" />Каталог</span>}>
-                  <Menu.Item key="catalog"><Link to="/admin/catalog">Категории</Link></Menu.Item>
-                  <Menu.Item key="counter"><Link to="/counter">Товары</Link></Menu.Item>
-                  <Menu.Item key="attributes/"><Link to="/">Атрибуты</Link></Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" title={<span><Icon type="user" />Пользователи</span>}>
-                  <Menu.Item key="4">Покупатели</Menu.Item>
-                  <Menu.Item key="5">Продавцы</Menu.Item>
-                </SubMenu>
-              </Menu>
+              <MenuAdmin />
             </Sider>
 
             <Layout className={cx('main')}>
-              <Breadcrumb className={cx('breadcrumb')}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>{'sdf'}</Breadcrumb.Item>
-              </Breadcrumb>
-
-              <Content className={cx('content')}>
-                {this.props.children}
-              </Content>
+              {this.props.children}
             </Layout>
           </Layout>
 

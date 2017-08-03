@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {ColumnProps} from "antd/lib/table/Column";
 import {ICatalog} from "models/catalog";
+import {Link} from 'react-router';
 
 const style = require('./style.less');
 const classNames = require('classnames/bind');
@@ -14,7 +15,9 @@ export const columns: ColumnProps<any>[] = [
     key: 'thumbnailUrl',
     width: '60px',
     render: (text: string, record: ICatalog) => (
-      <img className={cx('catalog__image')} src={record.thumbnailUrl} alt={record.title} title={record.title} />
+      <Link to={'/admin/category/' + record.id}>
+        <img className={cx('category__image')} src={record.thumbnailUrl} alt={record.title} title={record.title} />
+      </Link>
     )
   },
   {
