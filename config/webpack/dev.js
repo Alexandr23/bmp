@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -27,19 +26,8 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module) {
-        return module.context && module.context.indexOf('node_modules') !== -1;
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    // new HtmlWebpackPlugin({
-    //   template: './base.html',
-    //   filename: 'index.html',
-    // }),
-    new ExtractTextPlugin('styles.css'),
   ],
 
   module: {
@@ -49,23 +37,29 @@ module.exports = {
         exclude: /node_modules/,
         use: 'ts-loader',
       },
-      /*{
-        test: /\.css$/,
-        include: path.resolve('./src/app'),
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },*/
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {loader: 'css-loader'},
-            {loader: 'less-loader'}
-          ],
-        })
+        include: /node_modules/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ],
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
+          },
+          'less-loader'
+        ],
       },
       {
         test: /\.ttf(\?.*)?$/,

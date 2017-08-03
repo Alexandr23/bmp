@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var postcssAssets = require('postcss-assets');
 var postcssNext = require('postcss-cssnext');
 var stylelint = require('stylelint');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -23,7 +24,7 @@ var config = {
     modules: [path.resolve(__dirname), 'node_modules', 'app', 'app/redux'],
   },
 
-  entry: './src/ssr.tsx',
+  entry: './src/server.tsx',
 
   output: {
     path: path.resolve('./dist'),
@@ -34,9 +35,9 @@ var config = {
 
   module: {
     loaders: [{
-        test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
-      },
+      test: /\.(jpe?g|png|gif)$/i,
+      loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
+    },
       {
         test: /\.json$/,
         loader: 'json-loader'
@@ -59,12 +60,12 @@ var config = {
         loader: "file-loader"
       },
       {
-        test: /\.css$/,
-        include: path.resolve('./src/app'),
+        test: /\.css/,
+        include: /node_modules/,
         use: [
           'isomorphic-style-loader',
-          'css-loader'
-        ]
+          'css-loader',
+        ],
       },
       {
         test: /\.less$/,
@@ -72,14 +73,14 @@ var config = {
         use: [
           'isomorphic-style-loader',
           'css-loader',
-          'less-loader'
+          'less-loader',
         ],
       },
       {
         test: /\.less$/,
         exclude: /node_modules/,
         use: [
-          'isomorphic-style-loader',
+          {loader: 'isomorphic-style-loader',},
           {
             loader: 'css-loader',
             options: {
@@ -94,19 +95,19 @@ var config = {
   },
 
   plugins: [
-      new webpack.LoaderOptionsPlugin({
-        debug: false,
-        options: {
-          postcss: function () {
-            return [
-              postcssNext(),
-              postcssAssets({
-                relative: true
-              }),
-            ];
-          },
-        }
-      })
+    new webpack.LoaderOptionsPlugin({
+      debug: false,
+      options: {
+        postcss: function () {
+          return [
+            postcssNext(),
+            postcssAssets({
+              relative: true
+            }),
+          ];
+        },
+      }
+    })
   ],
 
   node: {

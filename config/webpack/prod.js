@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './src/client.tsx',
+    app: './src/client.tsx',
   },
 
   output: {
@@ -20,12 +20,6 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module) {
-        return module.context && module.context.indexOf('node_modules') !== -1;
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest'
     }),
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.UglifyJsPlugin({
@@ -43,12 +37,27 @@ module.exports = {
         use: 'ts-loader',
       },
       {
-        test: /\.css$/,
-        include: path.resolve('./src/app'),
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        test: /\.css/,
+        include: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {loader: 'css-loader'},
+          ],
+          publicPath: "/dist",
+        }),
+      },
+      {
+        test: /\.less$/,
+        include: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {loader: 'css-loader'},
+            {loader: 'less-loader'},
+          ],
+          publicPath: "/dist",
+        }),
       },
       {
         test: /\.less$/,

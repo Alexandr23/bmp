@@ -1,11 +1,9 @@
 {
   "scripts": {
-    "start": "node src/server.js",
-    "ssr": "node dist/server.js",
-    "start:prod": "cross-env NODE_ENV=production node src/server.js",
     "build": "webpack --config config/webpack/index.js",
     "build:prod": "cross-env NODE_ENV=production npm run build",
-    "postbuild": "webpack --config config/webpack/server.js"
+    "postbuild": "webpack --config config/webpack/server.js",
+    "server": "node dist/server.js"
   },
   "name": "BigMarketPlace",
   "version": "0.0.1",

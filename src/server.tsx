@@ -42,11 +42,13 @@ if (process.env.NODE_ENV !== 'production') {
     historyApiFallback: true,
     quiet: true,
   }));
+
   app.use(require('webpack-hot-middleware')(webpackCompiler));
 }
+
+
 //app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 app.use(express.static(path.join(__dirname, '')));
-
 
 
 app.get('*', (req: any, res: any) => {
@@ -57,10 +59,6 @@ app.get('*', (req: any, res: any) => {
 
   match({ history, routes: configureRoutes(store), location },
     (error, redirectLocation, renderProps) => {
-    console.log('error ___ ', error);
-    console.log('redirectLocation ___ ', redirectLocation);
-    //console.log('renderProps', renderProps);
-
       if (error) {
         res.status(500).send(error.message);
       } else if (redirectLocation) {
