@@ -95,7 +95,7 @@ var config = {
   },
 
   plugins: [
-    new webpack.LoaderOptionsPlugin({
+    /*new webpack.LoaderOptionsPlugin({
       debug: false,
       options: {
         postcss: function () {
@@ -107,7 +107,7 @@ var config = {
           ];
         },
       }
-    })
+    })*/
   ],
 
   node: {
