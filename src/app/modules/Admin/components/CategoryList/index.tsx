@@ -1,24 +1,24 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {connect} from 'react-redux';
-import {ICatalog, ICatalogState} from 'models/catalog';
+import {ICategoryListState} from 'models/categoryList';
+import {ICategory} from 'models/category';
 import {IState} from "models/store";
 import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
 import {columns} from './columns';
-import 'antd/lib/table/style';
 import './style.less';
 
 
 interface IProps {
-  catalog: ICatalogState;
+  categoryList: ICategoryListState;
 }
-class CategoryTable extends Table<ICatalog> {}
+class CategoryTable extends Table<ICategory> {}
 
 
 class CategoryList extends PureComponent<IProps, null> {
   public render () {
-    const {list} = this.props.catalog;
+    const {list} = this.props.categoryList;
     const pagination:PaginationProps = {
       total: list.length,
       pageSize: 10,
@@ -36,6 +36,6 @@ class CategoryList extends PureComponent<IProps, null> {
 
 
 const mapStateToProps = (state: IState) => ({
-  catalog: state.catalog,
+  categoryList: state.categoryList,
 });
-export default connect(mapStateToProps, {})(CategoryList);
+export default (connect as any)(mapStateToProps, {})(CategoryList);

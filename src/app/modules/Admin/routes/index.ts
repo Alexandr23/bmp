@@ -4,7 +4,8 @@ import Category from '../pages/Category';
 import Counter from '../pages/Counter';
 import Products from '../pages/Products';
 import Attributes from '../pages/Attributes';
-import {catalogGet} from 'redux/modules/catalog';
+import {categoryListGet} from 'redux/modules/categoryList';
+import {categoryGet} from 'redux/modules/category';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 
@@ -18,23 +19,25 @@ export default (store: Store<IState>) => {
         path: 'categories',
         component: Categories,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(catalogGet({albumId: 1}));
+          store.dispatch(categoryListGet({albumId: 1}));
           callback();
         },
       },
       {
         path: 'category/:id',
         component: Category,
-        // onEnter: (nextState: any, replace: any, callback: any) => {
-        //   store.dispatch(categoryGet({id: 1}));
-        //   callback();
-        // },
+        onEnter: (nextState: any, replace: any, callback: any) => {
+          console.log(nextState, replace, callback);
+
+          store.dispatch(categoryGet({id: nextState.params.id}));
+          callback();
+        },
       },
       {
         path: 'products',
         component: Products,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(catalogGet({albumId: 2}));
+          store.dispatch(categoryListGet({albumId: 2}));
           callback();
         },
       },
@@ -42,7 +45,7 @@ export default (store: Store<IState>) => {
         path: 'attributes',
         component: Attributes,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(catalogGet({albumId: 3}));
+          store.dispatch(categoryListGet({albumId: 3}));
           callback();
         },
       },

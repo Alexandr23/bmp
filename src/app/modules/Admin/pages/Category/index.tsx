@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import {Layout, Breadcrumb} from 'antd';
 const {Content} = Layout;
 const BreadcrumbItem = Breadcrumb.Item;
+import CategoryForm from '../../components/CategoryForm';
 import {cx} from '../../components/LayoutAdmin';
 
 
@@ -13,6 +14,10 @@ interface IProps {
 
 
 class Category extends PureComponent<IProps, null> {
+  componentWillMount () {
+
+  }
+
   render() {
     return (
       <div>
@@ -23,9 +28,9 @@ class Category extends PureComponent<IProps, null> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1>Категория "Печенье"</h1>
+          <h1 className={cx('title')}>Категория "Печенье"</h1>
 
-          фывафыва...
+          <CategoryForm />
         </Content>
       </div>
     );

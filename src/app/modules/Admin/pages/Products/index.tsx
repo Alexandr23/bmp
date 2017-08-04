@@ -22,7 +22,7 @@ class Products extends PureComponent<IProps, null> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1>Товары</h1>
+          <h1 className={cx('title')}>Товары</h1>
           <CategoryList />
         </Content>
       </div>

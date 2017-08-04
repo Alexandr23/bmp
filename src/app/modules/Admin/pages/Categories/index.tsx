@@ -4,8 +4,11 @@ import {Layout, Breadcrumb} from 'antd';
 const {Content} = Layout;
 const BreadcrumbItem = Breadcrumb.Item;
 import CategoryList from '../../components/CategoryList';
-import {cx} from '../../components/LayoutAdmin';
 
+/* Styles from AdminLayout */
+const style = require('../../components/LayoutAdmin/style.less');
+const classNames = require('classnames/bind');
+export const cx = classNames.bind(style);
 
 interface IProps {
   children: any;
@@ -22,7 +25,7 @@ class Categories extends PureComponent<IProps, null> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1>Категории товаров</h1>
+          <h1 className={cx('title')}>Категории товаров</h1>
           <CategoryList />
         </Content>
       </div>

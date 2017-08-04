@@ -22,7 +22,7 @@ class Attributes extends PureComponent<IProps, null> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1>Атрибуты товаров</h1>
+          <h1 className={cx('title')}>Атрибуты товаров</h1>
           <CategoryList />
         </Content>
       </div>

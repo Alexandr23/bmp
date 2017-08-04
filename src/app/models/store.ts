@@ -1,7 +1,9 @@
-import {ICatalogState} from "./catalog";
+import {ICategoryListState} from "./categoryList";
+import {ICategoryState} from "./category";
 import {RouterState} from "react-router-redux";
 
 export interface IState {
   routing: RouterState;
-  catalog?: ICatalogState;
+  categoryList?: ICategoryListState;
+  category?: ICategoryState;
 }

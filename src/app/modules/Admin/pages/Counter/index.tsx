@@ -43,7 +43,7 @@ class Counter extends PureComponent<IProps, IState> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1>Счетчик</h1>
+          <h1 className={cx('title')}>Счетчик</h1>
 
           <h3>{this.state.counter}</h3>
 
