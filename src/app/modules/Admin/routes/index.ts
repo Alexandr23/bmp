@@ -9,6 +9,11 @@ import {categoryGet} from 'redux/modules/category';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 
+import {AxiosResponse, AxiosError} from 'axios';
+
+import {categoryListGetRequest, categoryListGetSuccess, categoryListGetFailure} from '../../../redux/modules/categoryList';
+import * as apiCategory from 'api/category';
+
 export default (store: Store<IState>) => {
   return {
     path: 'admin',
@@ -19,8 +24,16 @@ export default (store: Store<IState>) => {
         path: 'categories',
         component: Categories,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(categoryListGet({albumId: 1}));
-          callback();
+          store.dispatch((dispatch: any) => {
+            dispatch(categoryListGetRequest());
+            apiCategory.getCategoryList({albumId: 1})
+              .then((response: AxiosResponse) => {dispatch((categoryListGetSuccess)(response)); callback();})
+              .catch((error: AxiosError) => {dispatch((categoryListGetFailure)(error)); callback();});
+          });
+
+          // store.dispatch(categoryListGet({albumId: 1})).then(() => {
+          //   callback();
+          // });
         },
       },
       {
