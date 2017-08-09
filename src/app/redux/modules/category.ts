@@ -50,7 +50,7 @@ export function CategoryReducer (state = INITIAL_STATE, action: ICategoryAction)
 export const categoryGet = (params: {id: number}) => {
   return (dispatch: any) => {
     dispatch(categoryGetRequest());
-    apiCategory.getCategory(params)
+    return apiCategory.getCategory(params)
       .then((response: AxiosResponse) => dispatch((categoryGetSuccess)(response)))
       .catch((error: AxiosError) => dispatch((categoryGetFailure)(error)));
   };

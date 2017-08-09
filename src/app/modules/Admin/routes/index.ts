@@ -9,58 +9,82 @@ import {categoryGet} from 'redux/modules/category';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 
-import {AxiosResponse, AxiosError} from 'axios';
 
-import {categoryListGetRequest, categoryListGetSuccess, categoryListGetFailure} from '../../../redux/modules/categoryList';
-import * as apiCategory from 'api/category';
+function counterWrapper (func: any, context:any = null) {
+  let counter:number = 0;
+
+  return function () {
+    counter++;
+    let args = Array.prototype.slice.call(arguments);
+    args.push(counter);
+
+    func.apply(context, args);
+  };
+}
+
 
 export default (store: Store<IState>) => {
+  const isClient = typeof window !== 'undefined';
+
   return {
     path: 'admin',
     component: Admin,
-    indexRoute: { onEnter: (nextState: any, replace: any) => replace('/categories') },
+    indexRoute: { onEnter: (nextState: any, replace: any) => replace('/admin/categories') },
     childRoutes: [
       {
         path: 'categories',
         component: Categories,
-        onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch((dispatch: any) => {
-            dispatch(categoryListGetRequest());
-            apiCategory.getCategoryList({albumId: 1})
-              .then((response: AxiosResponse) => {dispatch((categoryListGetSuccess)(response)); callback();})
-              .catch((error: AxiosError) => {dispatch((categoryListGetFailure)(error)); callback();});
-          });
+        onEnter: function (nextState: any, replace: any, callback: any) {
+          this.counter = this.counter || 1;
+          const state = store.getState();
 
-          // store.dispatch(categoryListGet({albumId: 1})).then(() => {
-          //   callback();
-          // });
+          if (isClient && state.categoryList.isLoaded && this.counter === 1) {
+            callback();
+          } else {
+            store.dispatch(categoryListGet({albumId: 1})).then(() => callback());
+          }
+
+          this.counter++;
         },
       },
       {
         path: 'category/:id',
         component: Category,
-        onEnter: (nextState: any, replace: any, callback: any) => {
-          console.log(nextState, replace, callback);
+        onEnter: counterWrapper((nextState: any, replace: any, callback: any, counter: number) => {
+          const state = store.getState();
 
-          store.dispatch(categoryGet({id: nextState.params.id}));
-          callback();
-        },
+          if (isClient && state.category.isLoaded && counter === 1) {
+            callback();
+          } else {
+            store.dispatch(categoryGet({id: nextState.params.id})).then(() => callback());
+          }
+        }),
       },
       {
         path: 'products',
         component: Products,
-        onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(categoryListGet({albumId: 2}));
-          callback();
-        },
+        onEnter: counterWrapper((nextState: any, replace: any, callback: any, counter: number) => {
+          const state = store.getState();
+
+          if (isClient && state.categoryList.isLoaded && counter === 1) {
+            callback();
+          } else {
+            store.dispatch(categoryListGet({albumId: 2})).then(() => callback());
+          }
+        }),
       },
       {
         path: 'attributes',
         component: Attributes,
-        onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(categoryListGet({albumId: 3}));
-          callback();
-        },
+        onEnter: counterWrapper((nextState: any, replace: any, callback: any, counter: number) => {
+          const state = store.getState();
+
+          if (isClient && state.categoryList.isLoaded && counter === 1) {
+            callback();
+          } else {
+            store.dispatch(categoryListGet({albumId: 3})).then(() => callback());
+          }
+        }),
       },
       {
         path: 'counter',

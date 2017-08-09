@@ -5,14 +5,12 @@ import configureAdminRoutes from '../modules/Admin/routes';
 
 
 export default (store: Store<IState>) => {
-  const adminRoutes = configureAdminRoutes(store);
-
   return {
     childRoutes: [{
       path: '/',
       component: App,
       childRoutes: [
-        adminRoutes,
+        configureAdminRoutes(store),
       ],
     }],
   }

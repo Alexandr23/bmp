@@ -4,9 +4,9 @@ import {ICategory} from 'models/category';
 import * as apiCategory from 'api/category';
 
 /** Action Types */
-export const CATALOG_GET_REQUEST: string = 'CATALOG_GET_REQUEST';
-export const CATALOG_GET_SUCCESS: string = 'CATALOG_GET_SUCCESS';
-export const CATALOG_GET_FAILURE: string = 'CATALOG_GET_FAILURE';
+export const CATEGORY_LIST_GET_REQUEST: string = 'CATEGORY_LIST_GET_REQUEST';
+export const CATEGORY_LIST_GET_SUCCESS: string = 'CATEGORY_LIST_GET_SUCCESS';
+export const CATEGORY_LIST_GET_FAILURE: string = 'CATEGORY_LIST_GET_FAILURE';
 
 /** Initial State */
 const INITIAL_STATE: ICategoryListState = {
@@ -25,13 +25,13 @@ export function CategoryListReducer (state = INITIAL_STATE, action: ICategoryLis
   const {type, payload} = action;
 
   switch (type) {
-    case CATALOG_GET_REQUEST:
+    case CATEGORY_LIST_GET_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
 
-    case CATALOG_GET_SUCCESS:
+    case CATEGORY_LIST_GET_SUCCESS:
       return {
         ...state,
         list: payload.list,
@@ -39,7 +39,7 @@ export function CategoryListReducer (state = INITIAL_STATE, action: ICategoryLis
         isLoaded: true,
       };
 
-    case CATALOG_GET_FAILURE:
+    case CATEGORY_LIST_GET_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -56,7 +56,7 @@ export function CategoryListReducer (state = INITIAL_STATE, action: ICategoryLis
 export const categoryListGet = (params: ICategory) => {
   return (dispatch: any) => {
     dispatch(categoryListGetRequest());
-    apiCategory.getCategoryList(params)
+    return apiCategory.getCategoryList(params)
       .then((response: AxiosResponse) => dispatch((categoryListGetSuccess)(response)))
       .catch((error: AxiosError) => dispatch((categoryListGetFailure)(error)));
   };
@@ -64,14 +64,14 @@ export const categoryListGet = (params: ICategory) => {
 
 export function categoryListGetRequest(): ICategoryListAction {
   return {
-    type: CATALOG_GET_REQUEST,
+    type: CATEGORY_LIST_GET_REQUEST,
     payload: {}
   };
 }
 
 export function categoryListGetSuccess(payload: AxiosResponse): ICategoryListAction {
   return {
-    type: CATALOG_GET_SUCCESS,
+    type: CATEGORY_LIST_GET_SUCCESS,
     payload: {
       list: payload.data,
     },
@@ -80,7 +80,7 @@ export function categoryListGetSuccess(payload: AxiosResponse): ICategoryListAct
 
 export function categoryListGetFailure(error: AxiosError): ICategoryListAction {
   return {
-    type: CATALOG_GET_FAILURE,
+    type: CATEGORY_LIST_GET_FAILURE,
     payload: {
       error,
     }
