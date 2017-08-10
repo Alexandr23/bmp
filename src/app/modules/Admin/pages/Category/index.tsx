@@ -8,27 +8,29 @@ const BreadcrumbItem = Breadcrumb.Item;
 import CategoryForm from '../../components/CategoryForm';
 import {cx} from '../../components/LayoutAdmin';
 import {IState} from 'models/store';
-import {ICategory} from 'models/category';
+import {ICategoryState} from 'models/category';
 
 
 interface IProps {
   children: any;
-  category: ICategory;
+  category: ICategoryState;
 }
 
 
 class Category extends PureComponent<IProps, null> {
   render() {
+    const {title} = this.props.category.data;
+
     return (
       <div>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem>Каталог</BreadcrumbItem>
           <BreadcrumbItem><Link to="/admin/categories">Категории товаров</Link></BreadcrumbItem>
-          <BreadcrumbItem>{this.props.category.title}</BreadcrumbItem>
+          <BreadcrumbItem>{title}</BreadcrumbItem>
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1 className={cx('title')}>Категория "Печенье"</h1>
+          <h1 className={cx('title')}>Категория "{title}"</h1>
 
           <CategoryForm category={this.props.category} />
         </Content>

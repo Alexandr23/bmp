@@ -34,7 +34,7 @@ class LayoutAdmin extends PureComponent<any, any> {
           </Layout>
 
           <Footer className={cx('footer')}>
-            © 2017 KDV. Created by Alexandr Nikiforov
+            © 2017 KDV. Mag Development
           </Footer>
         </Layout>
       </LocaleProvider>
