@@ -22,7 +22,12 @@ class Product extends PureComponent<IProps, any> {
         <div className={cx('inner')}>
           <img className={cx('image')} src={url} alt={title} />
 
-          <div className={cx('name')}>{title}</div>
+          <div className={cx('title')}>{title}</div>
+
+          <div className={cx('cart')}>
+            <div className={cx('price')}>1000 руб.</div>
+            <div className={cx('button')}>В корзину</div>
+          </div>
         </div>
       </div>
     );
