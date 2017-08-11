@@ -1,18 +1,27 @@
 import * as React from 'react';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router';
+import {browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
+import configureRoutes from './app/routes';
+import configureStore from './app/redux/store';
+const {ReduxAsyncConnect} = require('redux-connect');
 
-interface IRoot {
-    store: any;
-    history: any;
-    routes: any;
-}
+// interface IRoot {
+//     store: any;
+//     history: any;
+//     routes: any;
+// }
 
-const Root = ({store, history, routes}: IRoot) => (
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
+const store = configureStore(browserHistory, window.__INITIAL_STATE__);
+const history = syncHistoryWithStore(browserHistory, store);
+const routes = configureRoutes(store);
+const connectedCmp = (props: any) => <ReduxAsyncConnect {...props} />;
+
+const Root = () => (
+  <Provider store={store} key="provider">
+    <Router history={history} render={connectedCmp} >{routes}</Router>
   </Provider>
 );
-
 
 export default Root;
