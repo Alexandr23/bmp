@@ -1,14 +1,14 @@
 var webpack = require('webpack');
 var path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+//const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
 
   entry: {
     app: [
-      'react-dev-utils/webpackHotDevClient',
       'react-hot-loader/patch',
+      'react-dev-utils/webpackHotDevClient',
       './src/client.tsx'
     ],
   },
@@ -16,6 +16,7 @@ module.exports = {
   output: {
     path: path.resolve('./dist/'),
     filename: '[name].js?v=[hash]',
+    publicPath: path.resolve('./dist/'),
   },
 
   resolve: {
@@ -24,10 +25,10 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
     }),
-    new webpack.HotModuleReplacementPlugin(),
   ],
 
   module: {
@@ -35,7 +36,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'ts-loader',
+        use: ['react-hot-loader/webpack', 'ts-loader'],
       },
       {
         test: /\.less$/,

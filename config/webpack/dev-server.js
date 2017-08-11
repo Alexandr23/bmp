@@ -1,8 +1,11 @@
 var Express = require('express');
 var webpack = require('webpack');
 
+const e6p = require('es6-promise');
+e6p.polyfill();
+
 var config = require('../main');
-var webpackConfig = require('./dev');
+var webpackConfig = require('../webpack/dev');
 var compiler = webpack(webpackConfig);
 
 var host = config.host || 'localhost';
