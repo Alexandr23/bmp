@@ -40,7 +40,9 @@ class Html extends React.Component<IHtmlProps, {}> {
         <body>
           <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
           {initialState}
-          {renderScripts}
+          {/*{renderScripts}*/}
+          <script src="http://localhost:8890/vendor.js"></script>
+          <script src="http://localhost:8890/app.js"></script>
         </body>
       </html>
     );

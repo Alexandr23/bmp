@@ -4,8 +4,8 @@ import Category from '../pages/Category';
 import Counter from '../pages/Counter';
 import Products from '../pages/Products';
 import Attributes from '../pages/Attributes';
-import {categoryListGet} from 'redux/modules/categoryList';
-import {categoryGet} from 'redux/modules/category';
+import {categoryListGet} from '../../../redux/modules/categoryList';
+import {categoryGet} from '../../../redux/modules/category';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 

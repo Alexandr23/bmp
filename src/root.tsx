@@ -5,13 +5,8 @@ import {browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 import configureRoutes from './app/routes';
 import configureStore from './app/redux/store';
-const {ReduxAsyncConnect} = require('redux-connect');
+import {ReduxAsyncConnect} from 'redux-connect';
 
-// interface IRoot {
-//     store: any;
-//     history: any;
-//     routes: any;
-// }
 
 const store = configureStore(browserHistory, window.__INITIAL_STATE__);
 const history = syncHistoryWithStore(browserHistory, store);

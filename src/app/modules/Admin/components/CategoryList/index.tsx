@@ -26,6 +26,9 @@ class CategoryList extends PureComponent<IProps, null> {
       pageSizeOptions: ['10', '20', '50', '100'],
     };
 
+    // set rowKey
+    list.map(item => item.key = '' + item.id);
+
     return (
       <div className="table">
         <CategoryTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />

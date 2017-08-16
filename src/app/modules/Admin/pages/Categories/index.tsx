@@ -10,6 +10,7 @@ const style = require('../../components/LayoutAdmin/style.less');
 const classNames = require('classnames/bind');
 export const cx = classNames.bind(style);
 
+
 interface IProps {
   children: any;
 }
@@ -25,7 +26,7 @@ class Categories extends PureComponent<IProps, null> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1 className={cx('title')}>Категории товаров</h1>
+          <h1 className={cx('title')}>Категории товаров 123</h1>
           <CategoryList />
         </Content>
       </div>

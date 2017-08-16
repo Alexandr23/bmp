@@ -80,15 +80,15 @@ app.get('*', (req: any, res: any) => {
     });
 });
 
-app.listen(appConfig.port, appConfig.host, (err: any) => {
-  if (err) {
-    console.error(Chalk.bgRed(err));
-  } else {
-    console.info(Chalk.black.bgGreen(
-      `\n\n💂  Listening at http://${appConfig.host}:${appConfig.port}\n`,
-    ));
-  }
-});
+// app.listen(appConfig.port, appConfig.host, (err: any) => {
+//   if (err) {
+//     console.error(Chalk.bgRed(err));
+//   } else {
+//     console.info(Chalk.black.bgGreen(
+//       `\n\n💂  Listening at http://${appConfig.host}:${appConfig.port}\n`,
+//     ));
+//   }
+// });
 
 function renderHTML(markup: string, store: any) {
   const html = ReactDOMServer.renderToString(
@@ -97,3 +97,5 @@ function renderHTML(markup: string, store: any) {
 
   return `<!doctype html> ${html}`;
 }
+
+export default app;

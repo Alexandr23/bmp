@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+const mainConfig = require('../main');
 //const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -8,15 +9,16 @@ module.exports = {
   entry: {
     app: [
       'react-hot-loader/patch',
-      'react-dev-utils/webpackHotDevClient',
+      "webpack-dev-server/client?http://localhost:" + (+mainConfig.port + 1),
+      "webpack/hot/only-dev-server",
       './src/client.tsx'
     ],
   },
 
   output: {
-    path: path.resolve('./dist/'),
+    path: path.resolve('./dist'),
     filename: '[name].js?v=[hash]',
-    publicPath: path.resolve('./dist/'),
+    publicPath: "http://localhost:" + (+mainConfig.port + 1) + '/',
   },
 
   resolve: {
@@ -25,11 +27,24 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
     }),
+    new webpack.DefinePlugin({
+      "process.env": { BUILD_TARGET: JSON.stringify("client") },
+    }),
   ],
+
+  devServer: {
+    host: mainConfig.host,
+    port: +mainConfig.port + 1,
+    historyApiFallback: true,
+    hot: true,
+    headers: { "Access-Control-Allow-Origin": "*" },
+  },
 
   module: {
     rules: [

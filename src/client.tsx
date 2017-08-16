@@ -29,9 +29,12 @@ const render = (Component:any) => {
 };
 
 
-render(<Root />);
+render(Root);
 
 if ((module as any).hot) {
-    (module as any).hot.accept('./root', () => {render(<Root />);});
+    (module as any).hot.accept('./root', () => {
+      const RootNew = require('./root').default;
+      render(RootNew);
+    });
 }
 

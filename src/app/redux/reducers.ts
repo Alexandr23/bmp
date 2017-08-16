@@ -1,8 +1,8 @@
 import {routerReducer as routing} from 'react-router-redux';
 import {combineReducers} from 'redux';
-import {CategoryListReducer} from 'redux/modules/categoryList';
-import {CategoryReducer} from 'redux/modules/category';
-import {CatalogReducer} from 'redux/modules/catalog';
+import {CategoryListReducer} from './modules/categoryList';
+import {CategoryReducer} from './modules/category';
+import {CatalogReducer} from './modules/catalog';
 const reduxAsyncConnect = require('redux-connect').reducer;
 
 export default combineReducers({

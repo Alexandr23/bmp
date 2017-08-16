@@ -7,3 +7,7 @@ interface Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: <F extends Function>(f: F) => F;
   __INITIAL_STATE__?: any;
 }
+
+declare module 'redux-connect' {
+  function ReduxAsyncConnect():any;
+}

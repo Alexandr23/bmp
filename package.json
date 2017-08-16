@@ -1,18 +1,26 @@
 {
   "scripts": {
-    "dev": "webpack --config config/webpack/index.js",
-    "build": "cross-env NODE_ENV=production npm run build",
-    "postbuild": "webpack --config config/webpack/server.js",
+    "build": "webpack --config config/webpack/index.js",
+    "build:prod": "cross-env NODE_ENV=production npm run build",
     "server": "node dist/server.js",
-    "dev-server": "webpack --config config/webpack/dev-server.js"
+    "dev-server": "node config/webpack/dev-server.js",
+    "start:server": "webpack --config  config/webpack/server.js",
+    "start:client": "webpack-dev-server --config config/webpack/dev.js",
+    "start": "npm-run-all --parallel start:server start:client"
   },
   "name": "BigMarketPlace",
   "version": "0.0.1",
   "dependencies": {
     "antd": "^2.12.2",
     "axios": "^0.16.1",
+    "concurrently": "^3.5.0",
+    "es6-promise": "^4.1.1",
     "history": "^4.5.1",
+    "isomorphic-style-loader": "^4.0.0",
     "moment": "^2.18.1",
+    "npm-run-all": "^4.0.2",
+    "postcss-assets": "^4.2.0",
+    "postcss-cssnext": "^3.0.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-helmet": "^5.0.3",
@@ -20,14 +28,17 @@
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
+    "redux-connect": "^5.1.0",
     "redux-logger": "^3.0.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "start-server-webpack-plugin": "^2.2.0",
+    "stylelint": "^8.0.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
     "@types/classnames": "0.0.32",
     "@types/history": "^4.5.0",
     "@types/node": "^7.0.13",
-    "@types/react": "^15.0.23",
     "@types/react-dom": "^15.5.0",
     "@types/react-helmet": "^5.0.1",
     "@types/react-hot-loader": "^3.0.1",
@@ -55,7 +66,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "react-dev-utils": "^0.5.2",
-    "react-hot-loader": "^3.0.0-beta.6",
+    "react-hot-loader": "next",
     "react-router-redux": "^4.0.7",
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",
@@ -64,5 +75,9 @@
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.4",
     "webpack-hot-middleware": "^2.18.0"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Alexandr23/bmp.git",
+  "author": "a.nikiforov <a.nikiforov@magdv.com>",
+  "license": "MIT"
 }

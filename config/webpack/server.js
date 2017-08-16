@@ -1,10 +1,8 @@
 var path = require('path');
 var fs = require('fs');
 var webpack = require('webpack');
-var postcssAssets = require('postcss-assets');
-var postcssNext = require('postcss-cssnext');
-var stylelint = require('stylelint');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StartServerPlugin = require("start-server-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -16,6 +14,7 @@ fs.readdirSync('node_modules')
   });
 
 var config = {
+  //externals: [nodeExternals({whitelist: ['webpack/hot/poll?1000', 'antd']})],
   externals: nodeModules,
   target: 'node',
 
@@ -24,20 +23,21 @@ var config = {
     modules: [path.resolve(__dirname), 'node_modules', 'app', 'app/redux'],
   },
 
-  entry: './src/server.tsx',
+  entry: [ 'webpack/hot/poll?1000', './src/server/index.tsx' ],
 
   output: {
-    path: path.resolve('./dist'),
+    path: path.resolve('./dist/'),
     filename: 'server.js',
     publicPath: '/dist/',
     libraryTarget: 'commonjs2'
   },
 
   module: {
-    loaders: [{
-      test: /\.(jpe?g|png|gif)$/i,
-      loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
-    },
+    loaders: [
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
+      },
       {
         test: /\.json$/,
         loader: 'json-loader'
@@ -95,29 +95,28 @@ var config = {
   },
 
   plugins: [
-    /*new webpack.LoaderOptionsPlugin({
-      debug: false,
-      options: {
-        postcss: function () {
-          return [
-            postcssNext(),
-            postcssAssets({
-              relative: true
-            }),
-          ];
-        },
-      }
-    })*/
+    new StartServerPlugin("server.js"),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
+    new webpack.DefinePlugin({
+      "process.env": { BUILD_TARGET: JSON.stringify("server") },
+    }),
   ],
 
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false
-  }
+  // node: {
+  //   console: false,
+  //   global: false,
+  //   process: false,
+  //   Buffer: false,
+  //   __filename: false,
+  //   __dirname: false
+  // }
 };
 
 module.exports = config;
