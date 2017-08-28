@@ -1,12 +1,17 @@
 {
   "scripts": {
-    "build": "webpack --config config/webpack/index.js",
-    "build:prod": "cross-env NODE_ENV=production npm run build",
-    "server": "node dist/server.js",
-    "dev-server": "node config/webpack/dev-server.js",
-    "start:server": "webpack --config  config/webpack/server.js",
-    "start:client": "webpack-dev-server --config config/webpack/dev.js",
-    "start": "npm-run-all --parallel start:server start:client"
+    "client:dev": "webpack --config config/webpack/client.js",
+    "client:prod": "cross-env NODE_ENV=production npm run client:dev",
+    "client:start": "webpack-dev-server --config config/webpack/client.js",
+    "server:dev": "webpack --config config/webpack/server.js",
+    "server:prod": "cross-env NODE_ENV=production npm run server:dev",
+    "server:start": "node dist/server.js",
+
+    "build:dev": "npm run client:dev && npm run server:dev",
+    "build:prod": "npm run client:prod && npm run server:prod",
+
+    "start:dev": "npm-run-all --parallel server:dev client:start",
+    "start:prod": "npm run build:prod && npm run server:start"
   },
   "name": "BigMarketPlace",
   "version": "0.0.1",

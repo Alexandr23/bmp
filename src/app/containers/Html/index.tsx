@@ -7,43 +7,42 @@ interface IHtmlProps {
   store?: any;
 }
 
+const IS_DEV = process.env.NODE_ENV === 'development';
+
 class Html extends React.Component<IHtmlProps, {}> {
   private resolve(files: any) {
+    const basePath = IS_DEV ? 'http://localhost:8890' : '';
+
     return files.map((src: any) => {
-      //if (!this.props.manifest[src]) { return; }
-      return '/' + src;
+      return basePath + '/' + src;
     }).filter((file: any) => file !== undefined);
   }
 
   public render() {
-    //const head = Helmet.rewind();
     const { markup, store } = this.props;
     const styles = this.resolve(['styles.css']);
-    const renderStyles = styles.map((src: any, i: any) =>
-      <link key={i} rel="stylesheet" type="text/css" href={src} />,
-    );
+    const renderStyles = IS_DEV ? false : styles.map((src: any, i: any) => <link key={i} rel="stylesheet" type="text/css" href={src} />,);
     const scripts = this.resolve(['vendor.js', 'app.js']);
-    const renderScripts = scripts.map((src: any, i: any) =>
-      <script src={src} key={i} />,
-    );
-    // tslint:disable-next-line:max-line-length
-    const initialState = (
-      <script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />
-    );
+    const renderScripts = scripts.map((src: any, i: any) => <script src={src} key={i} />,);
+    const initialState = (<script charSet="UTF-8" dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} />);
+
+    console.log('___________________');
+    console.log('___________________');
+    console.log(process.env.NODE_ENV);
+    console.log('___________________');
+    console.log('___________________');
 
     return (
       <html>
-        <head>
-          {renderStyles}
-          <link rel="shortcut icon" href="/favicon.ico" />
-        </head>
-        <body>
-          <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
-          {initialState}
-          {/*{renderScripts}*/}
-          <script src="http://localhost:8890/vendor.js"></script>
-          <script src="http://localhost:8890/app.js"></script>
-        </body>
+      <head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        {renderStyles}
+      </head>
+      <body>
+        <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
+        {initialState}
+        {renderScripts}
+      </body>
       </html>
     );
   }

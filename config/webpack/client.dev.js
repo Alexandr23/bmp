@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
 const mainConfig = require('../main');
-//const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -10,7 +9,7 @@ module.exports = {
     app: [
       'react-hot-loader/patch',
       "webpack-dev-server/client?http://localhost:" + (+mainConfig.port + 1),
-      "webpack/hot/only-dev-server",
+      // "webpack/hot/only-dev-server",
       './src/client.tsx'
     ],
   },
@@ -34,7 +33,10 @@ module.exports = {
       name: 'vendor',
     }),
     new webpack.DefinePlugin({
-      "process.env": { BUILD_TARGET: JSON.stringify("client") },
+      "process.env": {
+        BUILD_TARGET: JSON.stringify("client"),
+        NODE_ENV: JSON.stringify("development"),
+      },
     }),
   ],
 
