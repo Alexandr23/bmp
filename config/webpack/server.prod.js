@@ -23,7 +23,7 @@ var config = {
   entry: './src/server/index.tsx',
 
   output: {
-    path: path.resolve('./dist/'),
+    path: path.resolve('./dist'),
     filename: 'server.js',
     publicPath: '/dist/',
     libraryTarget: 'commonjs2'
@@ -106,6 +106,15 @@ var config = {
       },
     }),
   ],
+
+  node: {
+      console: false,
+      global: false,
+      process: false,
+      Buffer: false,
+      __filename: false,
+      __dirname: false
+  }
 };
 
 module.exports = config;

@@ -42,7 +42,7 @@ app.use(compression());
 
 
 //app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
-app.use(express.static(path.join(__dirname, '/dist/')));
+app.use(express.static(path.join(__dirname, '')));
 
 
 app.get('*', (req: any, res: any) => {
