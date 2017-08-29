@@ -4,12 +4,13 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/client.tsx',
+    app: './src/client/index.tsx',
   },
 
   output: {
     path: path.resolve('./dist/'),
     filename: '[name].js?v=[hash]',
+    publicPath: path.resolve('./dist/'),
   },
 
   resolve: {

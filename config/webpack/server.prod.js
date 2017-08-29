@@ -20,7 +20,7 @@ var config = {
     modules: [path.resolve(__dirname), 'node_modules', 'app', 'app/redux'],
   },
 
-  entry: './src/server.tsx',
+  entry: './src/server/index.tsx',
 
   output: {
     path: path.resolve('./dist/'),

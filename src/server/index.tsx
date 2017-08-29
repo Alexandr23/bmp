@@ -1,30 +1,24 @@
-const appConfig = require('../config/main');
-
+const appConfig = require('../../config/main');
 import * as e6p from 'es6-promise';
-(e6p as any).polyfill();
 import 'isomorphic-fetch';
-
 import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
-
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 const { ReduxAsyncConnect, loadOnServer } = require('redux-connect');
-import configureStore from './app/redux/store';
-import configureRoutes from './app/routes';
-
-import Html from './app/containers/Html';
-//const manifest = require('../dist/manifest.json');
-
+import configureStore from '../app/redux/store';
+import configureRoutes from '../app/routes';
+import Html from './html';
 const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const Chalk = require('chalk');
-//const favicon = require('serve-favicon');
+
+(e6p as any).polyfill();
+
 
 const app = express();
-
 app.use(compression());
 
 // if (process.env.NODE_ENV !== 'production') {

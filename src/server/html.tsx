@@ -1,17 +1,19 @@
 import * as React from 'react';
-import * as Helmet from 'react-helmet';
+const mainConfig = require('../../config/main');
+const publicPath = 'http://' + mainConfig.host + ':' + (+mainConfig.port + 1);
 
+
+const IS_DEV = process.env.NODE_ENV === 'development';
 interface IHtmlProps {
   manifest?: any;
   markup?: string;
   store?: any;
 }
 
-const IS_DEV = process.env.NODE_ENV === 'development';
 
 class Html extends React.Component<IHtmlProps, {}> {
   private resolve(files: any) {
-    const basePath = IS_DEV ? 'http://localhost:8890' : '';
+    const basePath = IS_DEV ? publicPath : '';
 
     return files.map((src: any) => {
       return basePath + '/' + src;
@@ -25,12 +27,6 @@ class Html extends React.Component<IHtmlProps, {}> {
     const scripts = this.resolve(['vendor.js', 'app.js']);
     const renderScripts = scripts.map((src: any, i: any) => <script src={src} key={i} />,);
     const initialState = (<script charSet="UTF-8" dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} />);
-
-    console.log('___________________');
-    console.log('___________________');
-    console.log(process.env.NODE_ENV);
-    console.log('___________________');
-    console.log('___________________');
 
     return (
       <html>

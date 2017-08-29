@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 const mainConfig = require('../main');
+const publicPath = 'http://' + mainConfig.host + ':' + (+mainConfig.port + 1);
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -8,16 +9,15 @@ module.exports = {
   entry: {
     app: [
       'react-hot-loader/patch',
-      "webpack-dev-server/client?http://localhost:" + (+mainConfig.port + 1),
-      // "webpack/hot/only-dev-server",
-      './src/client.tsx'
+      'webpack-dev-server/client?' + publicPath,
+      './src/client/index.tsx'
     ],
   },
 
   output: {
     path: path.resolve('./dist'),
     filename: '[name].js?v=[hash]',
-    publicPath: "http://localhost:" + (+mainConfig.port + 1) + '/',
+    publicPath: publicPath,
   },
 
   resolve: {
