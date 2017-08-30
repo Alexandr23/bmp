@@ -3,8 +3,9 @@ const {PureComponent} = React;
 
 /* AntDesign */
 import {Layout, LocaleProvider} from 'antd';
+import en_US from 'antd/lib/locale-provider/en_US';
 const {Header, Footer, Sider} = Layout;
-import ruRU from 'antd/lib/locale-provider/ru_RU';
+
 import 'antd/dist/antd.less';
 import MenuAdmin from '../MenuAdmin';
 
@@ -17,7 +18,7 @@ export const cx = classNames.bind(style);
 class LayoutAdmin extends PureComponent<any, any> {
   render() {
     return (
-      <LocaleProvider locale={ruRU}>
+      <LocaleProvider locale={en_US}>
         <Layout className={cx('layout')}>
           <Header className={cx('header')}>
             <div className={cx('logo')} />

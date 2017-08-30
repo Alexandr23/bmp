@@ -1,6 +1,6 @@
 import * as React from 'react';
 const {PureComponent} = React;
-import {IProduct} from 'models/catalog';
+import {IProduct} from '../../models/catalog';
 
 /* Styles */
 const style = require('./style.less');

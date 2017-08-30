@@ -1,14 +1,16 @@
 import {routerReducer as routing} from 'react-router-redux';
 import {combineReducers} from 'redux';
-import {CategoryListReducer} from './modules/categoryList';
-import {CategoryReducer} from './modules/category';
-import {CatalogReducer} from './modules/catalog';
 const reduxAsyncConnect = require('redux-connect').reducer;
+
+
+/* Modules */
+import StoreReducer from '../modules/Store/redux/index';
+import AdminReducer from '../modules/Admin/redux/index';
+
 
 export default combineReducers({
   reduxAsyncConnect,
   routing,
-  categoryList: CategoryListReducer,
-  category: CategoryReducer,
-  catalog: CatalogReducer,
+  store: StoreReducer,
+  admin: AdminReducer,
 });

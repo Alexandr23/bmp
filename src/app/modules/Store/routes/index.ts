@@ -1,7 +1,7 @@
 import Catalog from '../pages/Catalog';
 import {Store} from 'redux';
 import {IState} from 'models/store';
-import {catalogGet} from '../../../redux/modules/catalog';
+import {catalogGet} from '../redux/catalog';
 
 
 export default (store: Store<IState>) => {

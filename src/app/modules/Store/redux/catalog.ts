@@ -1,6 +1,6 @@
 import {AxiosResponse, AxiosError} from 'axios';
-import {IProduct, ICatalogState, ICatalogAction} from 'models/catalog';
-import * as apiCatalog from 'api/catalog';
+import {IProduct, ICatalogState, ICatalogAction} from '../models/catalog';
+import * as apiCatalog from '../api/catalog';
 
 /** Action Types */
 export const CATALOG_GET_REQUEST: string = 'CATALOG_GET_REQUEST';

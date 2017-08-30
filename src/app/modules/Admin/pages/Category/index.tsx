@@ -8,7 +8,7 @@ const BreadcrumbItem = Breadcrumb.Item;
 import CategoryForm from '../../components/CategoryForm';
 import {cx} from '../../components/LayoutAdmin';
 import {IState} from 'models/store';
-import {ICategoryState} from 'models/category';
+import {ICategoryState} from '../../models/category';
 
 
 interface IProps {
@@ -40,5 +40,5 @@ class Category extends PureComponent<IProps, null> {
 }
 
 export default (connect as any)((state: IState) => ({
-  category: state.category
+  category: state.admin.category
 }))(Category);

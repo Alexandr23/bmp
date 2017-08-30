@@ -2,7 +2,7 @@ import * as React from 'react';
 const {PureComponent} = React;
 import {connect} from 'react-redux';
 import {IState} from 'models/store';
-import {ICatalogState} from 'models/catalog';
+import {ICatalogState} from '../../models/catalog';
 import Layout from '../../components/Layout';
 import Product from '../../components/Product';
 
@@ -38,5 +38,5 @@ class Catalog extends PureComponent<IProps, null> {
 }
 
 export default (connect as any)((state: IState) => ({
-  catalog: state.catalog,
+  catalog: state.store.catalog,
 }))(Catalog);

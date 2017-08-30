@@ -1,6 +1,6 @@
 import {AxiosResponse, AxiosError} from 'axios';
-import {ICategoryAction, ICategoryState} from 'models/category';
-import * as apiCategory from 'api/category';
+import {ICategoryAction, ICategoryState} from '../models/category';
+import * as apiCategory from '../api/category';
 
 /** Action Types */
 export const CATEGORY_GET_REQUEST: string = 'CATEGORY_GET_REQUEST';

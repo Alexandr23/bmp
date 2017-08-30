@@ -1,11 +1,13 @@
 import Admin from '../pages/Admin';
+import Catalogs from '../pages/Catalogs';
 import Categories from '../pages/Categories';
 import Category from '../pages/Category';
 import Counter from '../pages/Counter';
 import Products from '../pages/Products';
 import Attributes from '../pages/Attributes';
-import {categoryListGet} from '../../../redux/modules/categoryList';
-import {categoryGet} from '../../../redux/modules/category';
+import {categoryListGet} from '../redux/categoryList';
+import {catalogListGet} from '../redux/catalogList';
+import {categoryGet} from '../redux/category';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 
@@ -18,6 +20,13 @@ export default (store: Store<IState>) => {
     component: Admin,
     indexRoute: { onEnter: (nextState: any, replace: any) => replace('/admin/categories') },
     childRoutes: [
+      {
+        path: 'catalogs',
+        component: Catalogs,
+        onEnter: (nextState: any, replace: any, callback: any) => {
+          store.dispatch(catalogListGet()).then(() => callback());
+        },
+      },
       {
         path: 'categories',
         component: Categories,

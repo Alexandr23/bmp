@@ -16,7 +16,7 @@
   "name": "BigMarketPlace",
   "version": "0.0.1",
   "dependencies": {
-    "antd": "^2.12.2",
+    "antd": "^2.12.8",
     "axios": "^0.16.1",
     "concurrently": "^3.5.0",
     "es6-promise": "^4.1.1",

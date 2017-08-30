@@ -1,8 +1,6 @@
 import * as React from 'react';
 const {PureComponent} = React;
-import {connect} from 'react-redux';
-import {IState} from "models/store";
-import {ICategoryState} from 'models/category';
+import {ICategoryState} from '../../models/category';
 import './style.less';
 
 /* Ant Forms */

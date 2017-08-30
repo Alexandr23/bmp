@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ColumnProps} from "antd/lib/table/Column";
 import {Icon} from 'antd';
-import {ICategory} from "models/category";
+import {ICategory} from "../../models/category";
 import {Link} from 'react-router';
 
 const style = require('./style.less');
