@@ -1,5 +1,6 @@
 import Admin from '../pages/Admin';
 import Catalogs from '../pages/Catalogs';
+import Catalog from '../pages/Catalog';
 import Categories from '../pages/Categories';
 import Category from '../pages/Category';
 import Counter from '../pages/Counter';
@@ -7,6 +8,7 @@ import Products from '../pages/Products';
 import Attributes from '../pages/Attributes';
 import {categoryListGet} from '../redux/categoryList';
 import {catalogListGet} from '../redux/catalogList';
+import {catalogGet} from '../redux/catalog';
 import {categoryGet} from '../redux/category';
 import {Store} from 'redux';
 import {IState} from 'models/store';
@@ -25,6 +27,13 @@ export default (store: Store<IState>) => {
         component: Catalogs,
         onEnter: (nextState: any, replace: any, callback: any) => {
           store.dispatch(catalogListGet()).then(() => callback());
+        },
+      },
+      {
+        path: 'catalog/:id',
+        component: Catalog,
+        onEnter: (nextState: any, replace: any, callback: any) => {
+          store.dispatch(catalogGet({id: nextState.params.id})).then(() => callback());
         },
       },
       {

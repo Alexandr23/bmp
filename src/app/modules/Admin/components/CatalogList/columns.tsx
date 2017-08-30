@@ -14,14 +14,13 @@ export const columns: ColumnProps<any>[] = [
     title: 'id',
     dataIndex: 'id',
     key: 'id',
-    width: '60px',
-    render: (text: string, record: ICatalog) => <Link to={record.links.self}>{record.id}</Link>,
+    width: '30px',
   },
   {
     title: 'Имя',
     dataIndex: 'name',
     key: 'name',
-    render: (text: string, record: ICatalog) => record.attributes.name,
+    render: (text: string, record: ICatalog) => <Link to={`/admin/catalog/${record.id}`}>{record.attributes.name}</Link>,
   },
   {
     title: 'Описание',
@@ -33,7 +32,7 @@ export const columns: ColumnProps<any>[] = [
     title: 'Активен',
     dataIndex: 'is_active',
     key: 'is_active',
-    render: (text: string, record: ICatalog) => record.attributes.is_active,
+    render: (text: string, record: ICatalog) => record.attributes.is_active ? 'Да' : 'Нет',
   },
   {
     title: 'Создатель',

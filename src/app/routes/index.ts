@@ -10,9 +10,9 @@ export default (store: Store<IState>) => {
     childRoutes: [{
       path: '/',
       component: App,
-      indexRoute: { onEnter: (nextState: any, replace: any) => replace('/catalog') },
+      indexRoute: {onEnter: (nextState: any, replace: any) => replace('/store/catalog')},
       childRoutes: [
-        ...configureStoreRoutes(store),
+        configureStoreRoutes(store),
         configureAdminRoutes(store),
       ],
     }],

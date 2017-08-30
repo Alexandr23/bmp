@@ -5,5 +5,5 @@ import axios from 'axios';
 /**
  * api-метод получения Каталога
  */
-export const getCatalog = (params?: Object) => request.get('photos', {params});
+export const getCatalog = (params: {id: string}) => axios.get('http://api.bmp.magonline.ru/api/catalogs/' + params.id);
 export const getCatalogList = (params?: Object) => axios.get('http://api.bmp.magonline.ru/api/catalogs', {params});
