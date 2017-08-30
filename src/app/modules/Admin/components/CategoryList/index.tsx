@@ -3,7 +3,7 @@ const {PureComponent} = React;
 import {connect} from 'react-redux';
 import {ICategory, ICategoryListState} from '../../models/category';
 import {IState} from "models/store";
-import {Table, Pagination} from 'antd';
+import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
 import {columns} from './columns';
 import './style.less';
