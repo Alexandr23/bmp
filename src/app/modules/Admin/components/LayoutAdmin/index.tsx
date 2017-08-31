@@ -16,6 +16,8 @@ export const cx = classNames.bind(style);
 
 
 class LayoutAdmin extends PureComponent<any, any> {
+  props: any;
+
   render() {
     return (
       <LocaleProvider locale={ruRU}>

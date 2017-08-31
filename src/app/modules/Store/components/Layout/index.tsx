@@ -8,6 +8,8 @@ export const cx = classNames.bind(style);
 
 
 class Layout extends PureComponent<any, any> {
+  props: any;
+
   render() {
     return (
       <div className={cx('layout')}>

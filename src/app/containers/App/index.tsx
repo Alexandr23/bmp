@@ -9,6 +9,8 @@ interface IProps {
 
 
 class App extends PureComponent<IProps, null> {
+  props: IProps;
+
   render() {
     return (
       <div>

@@ -9,6 +9,8 @@ interface IProps {
 
 
 class Admin extends PureComponent<IProps, null> {
+  props: IProps;
+
   render() {
     return (
       <LayoutAdmin>{this.props.children}</LayoutAdmin>

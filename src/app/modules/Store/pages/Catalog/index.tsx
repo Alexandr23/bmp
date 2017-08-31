@@ -19,6 +19,8 @@ interface IProps {
 
 
 class Catalog extends PureComponent<IProps, null> {
+  props: IProps;
+
   render() {
     const {products} = this.props.catalog;
 

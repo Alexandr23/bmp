@@ -14,6 +14,8 @@ interface IProps {
 
 
 class Product extends PureComponent<IProps, any> {
+  props: IProps;
+
   render() {
     const {title, url} = this.props.product;
 

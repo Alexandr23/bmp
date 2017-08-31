@@ -18,6 +18,8 @@ interface IProps {
 
 
 class Category extends PureComponent<IProps, null> {
+  props: IProps;
+
   render() {
     const {title} = this.props.category.data;
 

@@ -16,6 +16,8 @@ class CategoryTable extends Table<ICategory> {}
 
 
 class CategoryList extends PureComponent<IProps, null> {
+  props: IProps;
+
   public render () {
     const {list} = this.props.categoryList;
     const pagination:PaginationProps = {

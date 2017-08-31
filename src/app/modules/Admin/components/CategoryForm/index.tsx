@@ -16,6 +16,8 @@ interface IProps {
 
 
 class CategoryForm extends PureComponent<IProps, any> {
+  props: IProps;
+
   handleSubmit = (e: any) => {
     e.preventDefault();
 
