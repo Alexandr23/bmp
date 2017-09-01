@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Link} from 'react-router';
 const {PureComponent} = React;
 
 /* Styles */
@@ -14,8 +15,8 @@ class Layout extends PureComponent<any, any> {
     return (
       <div className={cx('layout')}>
         <div className={cx('header')}>
-          <div className={cx('inner')}>
-            header
+          <div className={cx('header__inner')}>
+            <Link to="/admin"><div className={cx('logo')} /></Link>
           </div>
         </div>
 

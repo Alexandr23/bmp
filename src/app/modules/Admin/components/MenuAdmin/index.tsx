@@ -13,22 +13,17 @@ class MenuAdmin extends PureComponent<any, any> {
       <Menu
         mode="inline"
         defaultSelectedKeys={['catalog']}
-        defaultOpenKeys={['sub1', 'sub2']}
+        defaultOpenKeys={['users']}
         className={cx('menu')}
       >
-        <MenuItem key="counter"><Link to="/admin/counter">Счетчик</Link></MenuItem>
         <MenuItem key="catalog"><Link to="/admin/catalogs">Каталог</Link></MenuItem>
+        <MenuItem key="products"><Link to="/admin/products">Товары</Link></MenuItem>
+        <MenuItem key="categories"><Link to="/admin/categories">Категории</Link></MenuItem>
 
-        <SubMenu key="sub1" title={<span><Icon type="appstore-o" /><span>Каталог</span></span>}>
-          <MenuItem key="categories"><Link to="/admin/categories">Категории</Link></MenuItem>
-          <MenuItem key="products"><Link to="/admin/products">Товары</Link></MenuItem>
-          <MenuItem key="attributes"><Link to="/admin/attributes">Атрибуты</Link></MenuItem>
-        </SubMenu>
-
-        <SubMenu key="sub2" title={<span><Icon type="user" /><span>Пользователи</span></span>}>
+        {/*<SubMenu key="users" title={<span><Icon type="user" /><span>Пользователи</span></span>}>
           <MenuItem key="4">Покупатели</MenuItem>
           <MenuItem key="5">Продавцы</MenuItem>
-        </SubMenu>
+        </SubMenu>*/}
       </Menu>
     );
   }

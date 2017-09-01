@@ -1,7 +1,7 @@
-import request from '../../../services/request';
+import axios from 'axios';
 
 
 /**
  * api-метод получения Каталога
  */
-export const getCatalog = (params: Object) => request.get('photos', {params});
+export const getCatalog = (params: Object) => axios.get('https://jsonplaceholder.typicode.com/photos', {params});

@@ -3,7 +3,7 @@ const {PureComponent} = React;
 import {Layout, Breadcrumb} from 'antd';
 const {Content} = Layout;
 const BreadcrumbItem = Breadcrumb.Item;
-import CategoryList from '../../components/CategoryList';
+import ProductList from '../../components/ProductList';
 import {cx} from '../../components/LayoutAdmin';
 
 
@@ -22,8 +22,13 @@ class Products extends PureComponent<IProps, null> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1 className={cx('title')}>Товары</h1>
-          <CategoryList />
+          <div className={cx('content__header')}>
+            <h1 className={cx('title')}>Товары</h1>
+          </div>
+
+          <div className={cx('content__body')}>
+            <ProductList />
+          </div>
         </Content>
       </div>
     );

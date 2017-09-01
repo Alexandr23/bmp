@@ -10,7 +10,7 @@ const configureStore = (history: any, preloadedState: any) => {
   const middlewares = [thunk, logger, routerMiddleware(history)];
   const composeEnhancers = (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-  return createStore(rootReducer, preloadedState, composeEnhancers(applyMiddleware(...middlewares)));
+  return createStore(rootReducer, preloadedState, composeEnhancers((applyMiddleware as any)(...middlewares)));
 };
 
 

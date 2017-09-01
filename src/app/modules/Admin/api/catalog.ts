@@ -1,9 +1,30 @@
 import request from '../../../services/request';
-import axios from 'axios';
+
+
+const DEFAULT_CREATE = {
+  "data": {
+    "attributes": {
+      "name": "test 2",
+      "description": "test description",
+      "is_active": true
+    }
+  }
+};
 
 
 /**
- * api-метод получения Каталога
+ * Получение каталога
  */
-export const getCatalog = (params: {id: string}) => axios.get('http://api.bmp.magonline.ru/api/catalogs/' + params.id);
-export const getCatalogList = (params?: Object) => axios.get('http://api.bmp.magonline.ru/api/catalogs', {params});
+export const getCatalog = (params: {id: string}) => request.get('catalogs/' + params.id);
+
+
+/**
+ * Создание каталога
+ */
+export const createCatalog = () => request.post('catalogs', DEFAULT_CREATE);
+
+
+/**
+ * Получение списка каталогов
+ */
+export const getCatalogList = (params?: Object) => request.get('catalogs', {params});

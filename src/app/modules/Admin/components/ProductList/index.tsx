@@ -1,7 +1,7 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {connect} from 'react-redux';
-import {ICatalog, ICatalogListState} from '../../models/catalog';
+import {IProduct, IProductListState} from '../../models/product';
 import {IState} from "models/store";
 import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
@@ -10,17 +10,17 @@ import './style.less';
 
 
 interface IProps {
-  catalogList: ICatalogListState;
+  productList: IProductListState;
 }
-class CatalogTable extends Table<ICatalog> {}
+class ProductTable extends Table<IProduct> {}
 
 
-class CatalogList extends PureComponent<IProps, null> {
+class ProductList extends PureComponent<IProps, null> {
   public render () {
-    const {list} = this.props.catalogList;
+    const {list} = this.props.productList;
     const pagination:PaginationProps = {
       total: list.length,
-      pageSize: 20,
+      pageSize: 10,
       showSizeChanger: true,
       pageSizeOptions: ['10', '20', '50', '100'],
     };
@@ -30,7 +30,7 @@ class CatalogList extends PureComponent<IProps, null> {
 
     return (
       <div className="table">
-        <CatalogTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
+        <ProductTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
       </div>
     );
   }
@@ -38,6 +38,6 @@ class CatalogList extends PureComponent<IProps, null> {
 
 
 const mapStateToProps = (state: IState) => ({
-  catalogList: state.admin.catalogList,
+  productList: state.admin.productList,
 });
-export default (connect as any)(mapStateToProps, {})(CatalogList);
+export default (connect as any)(mapStateToProps, {})(ProductList);

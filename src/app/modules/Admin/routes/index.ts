@@ -3,13 +3,14 @@ import Catalogs from '../pages/Catalogs';
 import Catalog from '../pages/Catalog';
 import Categories from '../pages/Categories';
 import Category from '../pages/Category';
-import Counter from '../pages/Counter';
+import Product from '../pages/Product';
 import Products from '../pages/Products';
-import Attributes from '../pages/Attributes';
 import {categoryListGet} from '../redux/categoryList';
 import {catalogListGet} from '../redux/catalogList';
 import {catalogGet} from '../redux/catalog';
 import {categoryGet} from '../redux/category';
+import {productGet} from '../redux/product';
+import {productListGet} from '../redux/prodictList';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 
@@ -37,6 +38,20 @@ export default (store: Store<IState>) => {
         },
       },
       {
+        path: 'products',
+        component: Products,
+        onEnter: (nextState: any, replace: any, callback: any) => {
+          store.dispatch(productListGet()).then(() => callback());
+        },
+      },
+      {
+        path: 'product/:id',
+        component: Product,
+        onEnter: (nextState: any, replace: any, callback: any) => {
+          store.dispatch(productGet({id: nextState.params.id})).then(() => callback());
+        },
+      },
+      {
         path: 'categories',
         component: Categories,
         onEnter: (nextState: any, replace: any, callback: any) => {
@@ -49,24 +64,6 @@ export default (store: Store<IState>) => {
         onEnter: (nextState: any, replace: any, callback: any) => {
           store.dispatch(categoryGet({id: nextState.params.id})).then(() => callback());
         },
-      },
-      {
-        path: 'products',
-        component: Products,
-        onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(categoryListGet({albumId: 2})).then(() => callback());
-        },
-      },
-      {
-        path: 'attributes',
-        component: Attributes,
-        onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(categoryListGet({albumId: 3})).then(() => callback());
-        },
-      },
-      {
-        path: 'counter',
-        component: Counter,
       },
     ],
   }

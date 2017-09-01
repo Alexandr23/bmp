@@ -3,16 +3,18 @@
 }
 
 .header {
-  background-color: #bb112d;
-  padding: 0 50px;
+  background-color: #3366FF;
+  padding: 0 24px;
+  height: 50px;
+  line-height: 50px;
 }
 
 .logo {
-  display: block;
-  width: 105px;
+  display: inline-block;
+  width: 75px;
   height: 100%;
   background: url('../LayoutAdmin/img/logo.svg') center no-repeat;
-  background-size: 105px 28px;
+  background-size: 75px 20px;
 }
 
 .sider {
@@ -38,15 +40,46 @@
 
 .content {
   background: #ffffff;
-  padding: 15px 24px 24px;
   margin: 0;
   min-height: 280px
 }
 
+.content__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ececec;
+}
+
+.content__body {
+  padding: 20px;
+}
+
 .footer {
   text-align: center;
+  font-size: 12px;
+  line-height: 22px;
+  padding: 10px 24px;
 }
 
 .title {
-  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #444;
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+}
+
+.activity__title {
+  margin-right: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.activity__switch {
+
 }

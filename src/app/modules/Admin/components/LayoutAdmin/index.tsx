@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Link} from 'react-router';
 const {PureComponent} = React;
 
 /* AntDesign */
@@ -23,7 +24,7 @@ class LayoutAdmin extends PureComponent<any, any> {
       <LocaleProvider locale={ruRU}>
         <Layout className={cx('layout')}>
           <Header className={cx('header')}>
-            <div className={cx('logo')} />
+            <Link to="/"><div className={cx('logo')} /></Link>
           </Header>
 
           <Layout>

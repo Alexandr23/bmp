@@ -26,8 +26,13 @@ class Categories extends PureComponent<IProps, null> {
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1 className={cx('title')}>Категории товаров</h1>
-          <CategoryList />
+          <div className={cx('content__header')}>
+            <h1 className={cx('title')}>Категории товаров</h1>
+          </div>
+
+          <div className={cx('content__body')}>
+            <CategoryList />
+          </div>
         </Content>
       </div>
     );

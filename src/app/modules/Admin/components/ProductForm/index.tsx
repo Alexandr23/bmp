@@ -1,6 +1,6 @@
 import * as React from 'react';
 const {PureComponent} = React;
-import {ICatalogState} from '../../models/catalog';
+import {IProductState} from '../../models/product';
 import './style.less';
 
 /* Ant Forms */
@@ -11,11 +11,11 @@ const TextArea = Input.TextArea;
 
 interface IProps {
   form?: any;
-  catalog?: ICatalogState;
+  product?: IProductState;
 }
 
 
-class CategoryForm extends PureComponent<IProps, any> {
+class ProductForm extends PureComponent<IProps, any> {
   props: IProps;
 
   handleSubmit = (e: any) => {
@@ -25,8 +25,8 @@ class CategoryForm extends PureComponent<IProps, any> {
   };
 
   public render () {
-    const isLoaded = this.props.catalog.isLoaded;
-    const catalog = isLoaded ? this.props.catalog.data : {};
+    const isLoaded = this.props.product.isLoaded;
+    const product = isLoaded ? this.props.product.data : {};
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
@@ -55,36 +55,36 @@ class CategoryForm extends PureComponent<IProps, any> {
     return (
       <Form onSubmit={this.handleSubmit} style={{maxWidth: '600px'}}>
         <FormItem {...formItemLayout} label="Название" hasFeedback>
-          {getFieldDecorator('name', {
-            initialValue: isLoaded ? catalog.attributes.name : '',
-            rules: [{required: true, message: 'Введите название каталога'}],
+          {getFieldDecorator('short_name', {
+            initialValue: isLoaded ? product.attributes.short_name : '',
+            rules: [{required: true, message: 'Введите название товара'}],
           })(
             <Input />
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label="Описание" hasFeedback>
-          {getFieldDecorator('description', {
-            initialValue: isLoaded ? catalog.attributes.description : '',
-            rules: [{required: true, message: 'Введите описание каталога'}],
+        <FormItem {...formItemLayout} label="Полное название" hasFeedback>
+          {getFieldDecorator('long_name', {
+            initialValue: isLoaded ? product.attributes.long_name : '',
+            rules: [{required: true, message: 'Введите полное название товара'}],
           })(
             <TextArea />
           )}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Дата создания">
-          {catalog.attributes.date_created || '—'}
+          {product.attributes.date_created || '—'}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Создатель">
-          {catalog.attributes.creator_id || '—'}
+          {product.attributes.creator_id || '—'}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Дата редактирования">
-          {catalog.attributes.date_updated || '—'}
+          {product.attributes.date_updated || '—'}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Редактор">
-          {catalog.attributes.updater_id || '—'}
+          {product.attributes.updater_id || '—'}
         </FormItem>
 
         <FormItem {...tailFormItemLayout}>
@@ -95,4 +95,4 @@ class CategoryForm extends PureComponent<IProps, any> {
   }
 }
 
-export default (Form.create as any)()(CategoryForm);
+export default (Form.create as any)()(ProductForm);
