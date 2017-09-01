@@ -1,6 +1,7 @@
 import Admin from '../pages/Admin';
 import Catalogs from '../pages/Catalogs';
 import Catalog from '../pages/Catalog';
+import CatalogCreate from '../pages/CatalogCreate';
 import Categories from '../pages/Categories';
 import Category from '../pages/Category';
 import Product from '../pages/Product';
@@ -29,6 +30,10 @@ export default (store: Store<IState>) => {
         onEnter: (nextState: any, replace: any, callback: any) => {
           store.dispatch(catalogListGet()).then(() => callback());
         },
+      },
+      {
+        path: 'catalog/create',
+        component: CatalogCreate,
       },
       {
         path: 'catalog/:id',

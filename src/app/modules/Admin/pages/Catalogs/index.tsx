@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Link} from 'react-router';
 const {PureComponent} = React;
 import {Layout, Breadcrumb, Button} from 'antd';
 const {Content} = Layout;
@@ -11,20 +12,12 @@ const classNames = require('classnames/bind');
 export const cx = classNames.bind(style);
 
 
-import {createCatalog} from '../../api/catalog';
-
-
 interface IProps {
   children: any;
 }
 
 
 class Catalogs extends PureComponent<IProps, null> {
-  createCatalog = () => {
-    console.log('create');
-    createCatalog();
-  };
-
   render() {
     return (
       <div>
@@ -35,7 +28,9 @@ class Catalogs extends PureComponent<IProps, null> {
         <Content className={cx('content')}>
           <div className={cx('content__header')}>
             <h1 className={cx('title')}>Каталоги</h1>
-            <Button type="primary" icon="plus" ghost onClick={this.createCatalog}>Создать каталог</Button>
+            <Link to="/admin/catalog/create">
+              <Button type="primary" icon="plus" ghost>Создать каталог</Button>
+            </Link>
           </div>
 
           <div className={cx('content__body')}>

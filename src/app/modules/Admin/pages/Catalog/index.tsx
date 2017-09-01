@@ -2,7 +2,7 @@ import * as React from 'react';
 const {PureComponent} = React;
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {Layout, Breadcrumb, Switch, message} from 'antd';
+import {Layout, Breadcrumb} from 'antd';
 const {Content} = Layout;
 const BreadcrumbItem = Breadcrumb.Item;
 import CatalogForm from '../../components/CatalogForm';
@@ -15,26 +15,13 @@ interface IProps {
   children: any;
   catalog: ICatalogState;
 }
-interface IState {
-  isActive: boolean;
-}
 
 
-class Catalog extends PureComponent<IProps, IState> {
+class Catalog extends PureComponent<IProps, any> {
   props: IProps;
-  state: IState;
 
-  constructor (props: IProps) {
-    super(props);
-
-    this.state = {
-      isActive: this.props.catalog.data.attributes.is_active,
-    };
-  }
-
-  onChange = (isActive: boolean) => {
-    this.setState({isActive});
-    message.info(`Каталог теперь ${isActive ? 'активен' : 'неактивен'}`)
+  updateCatalog = (data: any) => {
+    console.log('update: ', data);
   };
 
   render() {
@@ -51,14 +38,10 @@ class Catalog extends PureComponent<IProps, IState> {
         <Content className={cx('content')}>
           <div className={cx('content__header')}>
             <h1 className={cx('title')}>Каталог "{isLoaded ? catalog.attributes.name : ''}"</h1>
-            <div className={cx('activity')}>
-              <div className={cx('activity__title')}>{this.state.isActive ? 'Активен' : 'Неактивен'}</div>
-              <Switch className={cx('activity__switch')} defaultChecked={this.state.isActive} onChange={this.onChange} />
-            </div>
           </div>
 
           <div className={cx('content__body')}>
-            <CatalogForm catalog={this.props.catalog} />
+            <CatalogForm catalog={this.props.catalog} onSubmit={this.updateCatalog} />
           </div>
         </Content>
       </div>

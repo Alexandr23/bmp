@@ -16,6 +16,8 @@ class CatalogTable extends Table<ICatalog> {}
 
 
 class CatalogList extends PureComponent<IProps, null> {
+  props: IProps;
+
   public render () {
     const {list} = this.props.catalogList;
     const pagination:PaginationProps = {
@@ -30,7 +32,7 @@ class CatalogList extends PureComponent<IProps, null> {
 
     return (
       <div className="table">
-        <CatalogTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
+        <CatalogTable bordered dataSource={list.reverse()} columns={columns} size="small" pagination={pagination} />
       </div>
     );
   }

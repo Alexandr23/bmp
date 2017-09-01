@@ -21,7 +21,7 @@ export const getCatalog = (params: {id: string}) => request.get('catalogs/' + pa
 /**
  * Создание каталога
  */
-export const createCatalog = () => request.post('catalogs', DEFAULT_CREATE);
+export const createCatalog = (data: any) => request.post('catalogs', data);
 
 
 /**
