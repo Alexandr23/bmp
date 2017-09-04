@@ -55,7 +55,7 @@ export function CatalogListReducer (state = INITIAL_STATE, action: ICatalogListA
 export const catalogListGet = (params?:any) => {
   return (dispatch: any) => {
     dispatch(catalogListGetRequest());
-    return apiCatalog.getCatalogList(params)
+    return apiCatalog.getCatalogList({...params, short_name: 'test'})
       .then((response: AxiosResponse) => dispatch((catalogListGetSuccess)(response)))
       .catch((error: AxiosError) => dispatch((catalogListGetFailure)(error)));
   };

@@ -6,17 +6,15 @@
     "server:dev": "webpack --config config/webpack/server.js",
     "server:prod": "cross-env NODE_ENV=production npm run server:dev",
     "server:start": "node dist/server.js",
-
     "build:dev": "npm run client:dev && npm run server:dev",
     "build:prod": "npm run client:prod && npm run server:prod",
-
     "start:dev": "npm-run-all --parallel server:dev client:start",
     "start:prod": "npm run build:prod && npm run server:start"
   },
   "name": "BigMarketPlace",
   "version": "0.0.1",
   "dependencies": {
-    "antd": "^2.12.8",
+    "antd": "2.13.0",
     "axios": "^0.16.1",
     "concurrently": "^3.5.0",
     "es6-promise": "^4.1.1",
