@@ -18,7 +18,7 @@ interface IProps {
 class CatalogCreatePage extends PureComponent<IProps, any> {
   props: IProps;
 
-  createCatalog = (data: any) => {
+  catalogCreate = (data: any) => {
     const dataPrepared = {data: {attributes: data}};
 
     this.props.catalogCreate(dataPrepared)
@@ -49,7 +49,7 @@ class CatalogCreatePage extends PureComponent<IProps, any> {
           </div>
 
           <div className={cx('content__body')}>
-            <CatalogForm onSubmit={this.createCatalog} />
+            <CatalogForm onSubmit={this.catalogCreate} />
           </div>
         </Content>
       </div>

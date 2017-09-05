@@ -13,6 +13,18 @@ export const createProduct = (data: any) => request.post('products', data);
 
 
 /**
+ * Редактирование товара
+ */
+export const updateProduct = (id: string, data: any) => request.put('products/' + id, data);
+
+
+/**
+ * Удаление товара
+ */
+export const deleteProduct = (id: string) => request.delete('products/' + id);
+
+
+/**
  * Получение списка товаров
  */
 export const getProductList = (params?: Object) => request.get('products', {params});
