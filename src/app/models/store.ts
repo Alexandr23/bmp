@@ -9,11 +9,11 @@ import {RouterState} from "react-router-redux";
 
 
 export interface IState {
+  routing?: RouterState;
   store: {
     catalog?: IStoreCatalogState;
   },
   admin: {
-    routing: RouterState;
     categoryList?: ICategoryListState;
     category?: ICategoryState;
     catalog?: ICatalogState;

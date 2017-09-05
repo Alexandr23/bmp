@@ -1,6 +1,7 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {IProductState} from '../../models/product';
+import {LAYOUT_MAIN, LAYOUT_BUTTON} from './layouts';
 import './style.less';
 
 /* Ant Forms */
@@ -12,49 +13,45 @@ const TextArea = Input.TextArea;
 interface IProps {
   form?: any;
   product?: IProductState;
+  onSubmit: (form: Object) => void;
 }
 
 
 class ProductForm extends PureComponent<IProps, any> {
   props: IProps;
 
-  handleSubmit = (e: any) => {
+  isValid = (data) => {
+    let isValid = true;
+
+    Object.keys(data).forEach(key => {
+      if (data[key] && data[key].length > 0) {
+        isValid = false;
+      }
+    });
+
+    return isValid;
+  };
+
+  handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(this.props.form.getFieldsValue());
+    this.props.form.validateFields();
+    const errors = this.props.form.getFieldsError();
+    const isValid = this.isValid(errors);
+
+    if (this.props.onSubmit && isValid) {
+      this.props.onSubmit(this.props.form.getFieldsValue());
+    }
   };
 
   public render () {
-    const isLoaded = this.props.product.isLoaded;
-    const product = isLoaded ? this.props.product.data : {};
+    const isLoaded = this.props.product && this.props.product.isLoaded;
+    const product = isLoaded ? this.props.product.data : null;
     const { getFieldDecorator } = this.props.form;
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 18 },
-      },
-    };
-
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 14,
-          offset: 6,
-        },
-      },
-    };
 
     return (
       <Form onSubmit={this.handleSubmit} style={{maxWidth: '600px'}}>
-        <FormItem {...formItemLayout} label="Название" hasFeedback>
+        <FormItem {...LAYOUT_MAIN} label="Название" hasFeedback>
           {getFieldDecorator('short_name', {
             initialValue: isLoaded ? product.attributes.short_name : '',
             rules: [{required: true, message: 'Введите название товара'}],
@@ -62,7 +59,7 @@ class ProductForm extends PureComponent<IProps, any> {
             <Input />
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label="Полное название" hasFeedback>
+        <FormItem {...LAYOUT_MAIN} label="Полное название" hasFeedback>
           {getFieldDecorator('long_name', {
             initialValue: isLoaded ? product.attributes.long_name : '',
             rules: [{required: true, message: 'Введите полное название товара'}],
@@ -71,23 +68,7 @@ class ProductForm extends PureComponent<IProps, any> {
           )}
         </FormItem>
 
-        <FormItem {...formItemLayout} label="Дата создания">
-          {product.attributes.date_created || '—'}
-        </FormItem>
-
-        <FormItem {...formItemLayout} label="Создатель">
-          {product.attributes.creator_id || '—'}
-        </FormItem>
-
-        <FormItem {...formItemLayout} label="Дата редактирования">
-          {product.attributes.date_updated || '—'}
-        </FormItem>
-
-        <FormItem {...formItemLayout} label="Редактор">
-          {product.attributes.updater_id || '—'}
-        </FormItem>
-
-        <FormItem {...tailFormItemLayout}>
+        <FormItem {...LAYOUT_BUTTON}>
           <Button type="primary" htmlType="submit">Сохранить</Button>
         </FormItem>
       </Form>

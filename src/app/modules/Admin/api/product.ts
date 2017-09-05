@@ -1,20 +1,15 @@
 import request from '../../../services/request';
 
 
-const DEFAULT_CREATE = {
-  data: {
-    attributes: {
-      name: 'test',
-      description: 'test description',
-    }
-  }
-};
-
-
 /**
  * Получение товара по Id
  */
 export const getProduct = (params: {id: string}) => request.get('products/' + params.id);
+
+/**
+ * Создание товара
+ */
+export const createProduct = (data: any) => request.post('products', data);
 
 
 /**

@@ -1,32 +1,45 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {Link} from 'react-router';
-import {Menu, Icon} from 'antd';
-const SubMenu = Menu.SubMenu;
+import {connect} from 'react-redux';
+import {Location} from 'history';
+import {cx} from '../LayoutAdmin';
+import {ENTITY} from '../../../../constants/entity';
+
+/* AntDesign */
+import {Menu} from 'antd';
+import {IState} from "../../../../models/store";
 const MenuItem = Menu.Item;
-import {cx} from '../LayoutAdmin'
 
 
-class MenuAdmin extends PureComponent<any, any> {
+interface IProps {
+  location: Location;
+}
+
+
+class MenuAdmin extends PureComponent<IProps, any> {
+  props: IProps;
+
   render() {
+    let currentEntity = ENTITY.catalog;
+    Object.keys(ENTITY).forEach(key => {
+      currentEntity = this.props.location.pathname.indexOf(ENTITY[key]) !== -1 ? ENTITY[key] : currentEntity;
+    });
+
     return (
       <Menu
         mode="inline"
-        defaultSelectedKeys={['catalog']}
-        defaultOpenKeys={['users']}
+        defaultSelectedKeys={[currentEntity]}
         className={cx('menu')}
       >
-        <MenuItem key="catalog"><Link to="/admin/catalogs">Каталог</Link></MenuItem>
-        <MenuItem key="products"><Link to="/admin/products">Товары</Link></MenuItem>
-        <MenuItem key="categories"><Link to="/admin/categories">Категории</Link></MenuItem>
-
-        {/*<SubMenu key="users" title={<span><Icon type="user" /><span>Пользователи</span></span>}>
-          <MenuItem key="4">Покупатели</MenuItem>
-          <MenuItem key="5">Продавцы</MenuItem>
-        </SubMenu>*/}
+        <MenuItem key={ENTITY.catalog}><Link to="/admin/catalog/list">Каталог</Link></MenuItem>
+        <MenuItem key={ENTITY.product}><Link to="/admin/product/list">Товары</Link></MenuItem>
+        <MenuItem key={ENTITY.category}><Link to="/admin/category/list">Категории</Link></MenuItem>
       </Menu>
     );
   }
 }
 
-export default MenuAdmin;
+export default (connect as any)((state: IState) => ({
+  location: state.routing.locationBeforeTransitions,
+}))(MenuAdmin);

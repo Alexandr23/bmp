@@ -15,7 +15,7 @@ interface IProps {
   catalogCreate: (data: any) => any;
 }
 
-class CatalogCreate extends PureComponent<IProps, any> {
+class CatalogCreatePage extends PureComponent<IProps, any> {
   props: IProps;
 
   createCatalog = (data: any) => {
@@ -39,7 +39,7 @@ class CatalogCreate extends PureComponent<IProps, any> {
     return (
       <div>
         <Breadcrumb className={cx('breadcrumb')}>
-          <BreadcrumbItem><Link to="/admin/catalogs">Каталоги</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to="/admin/catalog/list">Каталоги</Link></BreadcrumbItem>
           <BreadcrumbItem>Создание каталога</BreadcrumbItem>
         </Breadcrumb>
 
@@ -57,4 +57,4 @@ class CatalogCreate extends PureComponent<IProps, any> {
   }
 }
 
-export default (connect as any)(null, {catalogCreate})(CatalogCreate);
+export default (connect as any)(null, {catalogCreate})(CatalogCreatePage);

@@ -18,7 +18,7 @@ interface IProps {
 }
 
 
-class Catalog extends PureComponent<IProps, null> {
+class CatalogPage extends PureComponent<IProps, null> {
   props: IProps;
 
   render() {
@@ -41,4 +41,4 @@ class Catalog extends PureComponent<IProps, null> {
 
 export default (connect as any)((state: IState) => ({
   catalog: state.store.catalog,
-}))(Catalog);
+}))(CatalogPage);

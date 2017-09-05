@@ -17,7 +17,7 @@ interface IProps {
 }
 
 
-class Catalogs extends PureComponent<IProps, null> {
+class CatalogListPage extends PureComponent<IProps, null> {
   render() {
     return (
       <div>
@@ -42,4 +42,4 @@ class Catalogs extends PureComponent<IProps, null> {
   }
 }
 
-export default Catalogs;
+export default CatalogListPage;

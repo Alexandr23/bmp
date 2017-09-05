@@ -7,6 +7,10 @@ export const PRODUCT_GET_REQUEST: string = 'PRODUCT_GET_REQUEST';
 export const PRODUCT_GET_SUCCESS: string = 'PRODUCT_GET_SUCCESS';
 export const PRODUCT_GET_FAILURE: string = 'PRODUCT_GET_FAILURE';
 
+export const PRODUCT_CREATE_REQUEST: string = 'PRODUCT_CREATE_REQUEST';
+export const PRODUCT_CREATE_SUCCESS: string = 'PRODUCT_CREATE_SUCCESS';
+export const PRODUCT_CREATE_FAILURE: string = 'PRODUCT_CREATE_FAILURE';
+
 /** Initial State */
 const INITIAL_STATE: IProductState = {
   data: {},
@@ -34,6 +38,26 @@ export function ProductReducer (state = INITIAL_STATE, action: IProductAction) {
       };
 
     case PRODUCT_GET_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+      };
+
+    case PRODUCT_CREATE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case PRODUCT_CREATE_SUCCESS:
+      return {
+        ...state,
+        data: payload.data,
+        isLoading: false,
+        isLoaded: true,
+      };
+
+    case PRODUCT_CREATE_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -75,6 +99,42 @@ export function productGetSuccess(payload: AxiosResponse): IProductAction {
 export function productGetFailure(error: AxiosError): IProductAction {
   return {
     type: PRODUCT_GET_FAILURE,
+    payload: {
+      error,
+    }
+  };
+}
+
+
+/** Action Creators */
+export const productCreate = (params: {id: string}) => {
+  return (dispatch: any) => {
+    dispatch(productCreateRequest());
+    return apiProduct.createProduct(params)
+      .then((response: AxiosResponse) => dispatch((productCreateSuccess)(response)))
+      .catch((error: AxiosError) => dispatch((productCreateFailure)(error)));
+  };
+};
+
+export function productCreateRequest(): IProductAction {
+  return {
+    type: PRODUCT_CREATE_REQUEST,
+    payload: {}
+  };
+}
+
+export function productCreateSuccess(payload: AxiosResponse): IProductAction {
+  return {
+    type: PRODUCT_CREATE_SUCCESS,
+    payload: {
+      data: payload.data.data,
+    },
+  };
+}
+
+export function productCreateFailure(error: AxiosError): IProductAction {
+  return {
+    type: PRODUCT_CREATE_FAILURE,
     payload: {
       error,
     }

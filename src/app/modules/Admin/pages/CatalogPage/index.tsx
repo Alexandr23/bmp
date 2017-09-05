@@ -8,7 +8,7 @@ const BreadcrumbItem = Breadcrumb.Item;
 import CatalogForm from '../../components/CatalogForm';
 import {cx} from '../../components/LayoutAdmin';
 import {IState as IStore} from 'models/store';
-import {ICatalogState} from '../../models/catalog';
+import {ICatalogState, ICatalog} from '../../models/catalog';
 
 
 interface IProps {
@@ -17,7 +17,7 @@ interface IProps {
 }
 
 
-class Catalog extends PureComponent<IProps, any> {
+class CatalogPage extends PureComponent<IProps, any> {
   props: IProps;
 
   updateCatalog = (data: any) => {
@@ -26,12 +26,12 @@ class Catalog extends PureComponent<IProps, any> {
 
   render() {
     const isLoaded = this.props.catalog.isLoaded;
-    const catalog = isLoaded ? this.props.catalog.data : {};
+    const catalog:ICatalog = isLoaded ? this.props.catalog.data : {};
 
     return (
       <div>
         <Breadcrumb className={cx('breadcrumb')}>
-          <BreadcrumbItem><Link to="/admin/catalogs">Каталоги</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to="/admin/catalog/list">Каталоги</Link></BreadcrumbItem>
           <BreadcrumbItem>{isLoaded ? catalog.attributes.name : ''}</BreadcrumbItem>
         </Breadcrumb>
 
@@ -51,4 +51,4 @@ class Catalog extends PureComponent<IProps, any> {
 
 export default (connect as any)((state: IStore) => ({
   catalog: state.admin.catalog
-}))(Catalog);
+}))(CatalogPage);

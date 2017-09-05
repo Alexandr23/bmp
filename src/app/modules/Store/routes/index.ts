@@ -1,5 +1,5 @@
 import Shop from '../pages/Shop';
-import Catalog from '../pages/Catalog';
+import CatalogPage from '../pages/CatalogPage';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 import {catalogGet} from '../redux/catalog';
@@ -13,7 +13,7 @@ export default (store: Store<IState>) => {
     childRoutes: [
       {
         path: 'catalog',
-        component: Catalog,
+        component: CatalogPage,
         onEnter: (nextState: any, replace: any, callback: any) => {
           store.dispatch(catalogGet({albumId: 1})).then(() => callback());
         },

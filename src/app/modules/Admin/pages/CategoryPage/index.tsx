@@ -17,7 +17,7 @@ interface IProps {
 }
 
 
-class Category extends PureComponent<IProps, null> {
+class CategoryPage extends PureComponent<IProps, null> {
   props: IProps;
 
   render() {
@@ -27,14 +27,18 @@ class Category extends PureComponent<IProps, null> {
       <div>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem>Каталог</BreadcrumbItem>
-          <BreadcrumbItem><Link to="/admin/categories">Категории товаров</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to="/admin/category/list">Категории товаров</Link></BreadcrumbItem>
           <BreadcrumbItem>{title}</BreadcrumbItem>
         </Breadcrumb>
 
         <Content className={cx('content')}>
-          <h1 className={cx('title')}>Категория "{title}"</h1>
+          <div className={cx('content__header')}>
+            <h1 className={cx('title')}>Категория "{title}"</h1>
+          </div>
 
-          <CategoryForm category={this.props.category} />
+          <div className={cx('content__body')}>
+            <CategoryForm category={this.props.category} />
+          </div>
         </Content>
       </div>
     );
@@ -43,4 +47,4 @@ class Category extends PureComponent<IProps, null> {
 
 export default (connect as any)((state: IState) => ({
   category: state.admin.category
-}))(Category);
+}))(CategoryPage);
