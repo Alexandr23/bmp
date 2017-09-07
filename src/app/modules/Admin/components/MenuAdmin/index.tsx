@@ -28,11 +28,12 @@ class MenuAdmin extends PureComponent<IProps, any> {
 
     return (
       <Menu
-        mode="inline"
+        mode="horizontal"
+        theme="dark"
         defaultSelectedKeys={[currentEntity]}
         className={cx('menu')}
       >
-        <MenuItem key={ENTITY.catalog}><Link to="/admin/catalog/list">Каталог</Link></MenuItem>
+        <MenuItem key={ENTITY.catalog}><Link to="/admin/catalog/list">Каталоги</Link></MenuItem>
         <MenuItem key={ENTITY.product}><Link to="/admin/product/list">Товары</Link></MenuItem>
         <MenuItem key={ENTITY.category}><Link to="/admin/category/list">Категории</Link></MenuItem>
       </Menu>

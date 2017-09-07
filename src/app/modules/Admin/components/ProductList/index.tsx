@@ -8,6 +8,11 @@ import {PaginationProps} from 'antd/lib/pagination';
 import {columns} from './columns';
 import './style.less';
 
+/* Styles */
+const style = require('./style.less');
+const classNames = require('classnames/bind');
+const cx = classNames.bind(style);
+
 
 interface IProps {
   productList: IProductListState;
@@ -29,7 +34,7 @@ class ProductList extends PureComponent<IProps, null> {
     list.map(item => item.key = '' + item.id);
 
     return (
-      <div className="table">
+      <div className={cx('table')}>
         <ProductTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
       </div>
     );

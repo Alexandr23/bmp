@@ -67,7 +67,7 @@ var config = {
       },
       {
         test: /\.less$/,
-        include: /node_modules/,
+        include: [/node_modules/, path.resolve('./src/app/styles')],
         use: [
           'isomorphic-style-loader',
           'css-loader',
@@ -76,7 +76,7 @@ var config = {
       },
       {
         test: /\.less$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, path.resolve('./src/app/styles')],
         use: [
           {loader: 'isomorphic-style-loader',},
           {

@@ -27,28 +27,28 @@ export const columns: ColumnProps<any>[] = [
     key: 'long_name',
     render: (text: string, record: IProduct) => record.attributes.long_name,
   },
-  {
-    title: 'Создатель',
-    dataIndex: 'creator_id',
-    key: 'creator_id',
-    render: (text: string, record: IProduct) => record.attributes.creator_id,
-  },
-  {
-    title: 'Дата создания',
-    dataIndex: 'date_created',
-    key: 'date_created',
-    render: (text: string, record: IProduct) => record.attributes.date_created,
-  },
-  {
-    title: 'Редактор',
-    dataIndex: 'updater_id',
-    key: 'updater_id',
-    render: (text: string, record: IProduct) => record.attributes.updater_id,
-  },
-  {
-    title: 'Дата редактирования',
-    dataIndex: 'date_updated',
-    key: 'date_updated',
-    render: (text: string, record: IProduct) => record.attributes.date_updated,
-  },
+  // {
+  //   title: 'Создатель',
+  //   dataIndex: 'creator_id',
+  //   key: 'creator_id',
+  //   render: (text: string, record: IProduct) => record.attributes.creator_id,
+  // },
+  // {
+  //   title: 'Дата создания',
+  //   dataIndex: 'date_created',
+  //   key: 'date_created',
+  //   render: (text: string, record: IProduct) => record.attributes.date_created,
+  // },
+  // {
+  //   title: 'Редактор',
+  //   dataIndex: 'updater_id',
+  //   key: 'updater_id',
+  //   render: (text: string, record: IProduct) => record.attributes.updater_id,
+  // },
+  // {
+  //   title: 'Дата редактирования',
+  //   dataIndex: 'date_updated',
+  //   key: 'date_updated',
+  //   render: (text: string, record: IProduct) => record.attributes.date_updated,
+  // },
 ];

@@ -25,9 +25,10 @@ class LayoutAdmin extends PureComponent<any, any> {
         <Layout className={cx('layout')}>
           <Header className={cx('header')}>
             <Link to="/"><div className={cx('logo')} /></Link>
+            <MenuAdmin />
           </Header>
 
-          <Layout>
+          {/*<Layout>
             <Sider className={cx('sider')}>
               <MenuAdmin />
             </Sider>
@@ -35,6 +36,10 @@ class LayoutAdmin extends PureComponent<any, any> {
             <Layout className={cx('main')}>
               {this.props.children}
             </Layout>
+          </Layout>*/}
+
+          <Layout>
+            {this.props.children}
           </Layout>
 
           <Footer className={cx('footer')}>
