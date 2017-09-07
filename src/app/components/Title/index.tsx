@@ -4,7 +4,7 @@ import {Tree} from 'antd';
 const TreeNode = Tree.TreeNode;
 
 /* Styles */
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 const cx = classNames.bind(style);
 

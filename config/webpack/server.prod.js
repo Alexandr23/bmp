@@ -23,9 +23,9 @@ var config = {
   entry: './src/server/index.tsx',
 
   output: {
-    path: path.resolve('./dist'),
+    path: path.resolve('./dist/'),
     filename: 'server.js',
-    publicPath: '/dist/',
+    publicPath: '/',
     libraryTarget: 'commonjs2'
   },
 
@@ -33,7 +33,7 @@ var config = {
     loaders: [
       {
         test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
+        loader: 'url-loader?limit=1000&name=image/[hash].[ext]'
       },
       {
         test: /\.json$/,
@@ -57,14 +57,6 @@ var config = {
         loader: "file-loader"
       },
       {
-        test: /\.css/,
-        include: /node_modules/,
-        use: [
-          'isomorphic-style-loader',
-          'css-loader',
-        ],
-      },
-      {
         test: /\.less$/,
         include: /node_modules/,
         use: [
@@ -74,18 +66,21 @@ var config = {
         ],
       },
       {
-        test: /\.less$/,
-        exclude: /node_modules/,
+        test: /\.scss/,
+        include: path.resolve('./src/app/styles'),
         use: [
-          {loader: 'isomorphic-style-loader',},
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[local]__[hash:base64:5]'
-            }
-          },
-          'less-loader'
+          'isomorphic-style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.scss/,
+        exclude: [/node_modules/, path.resolve('./src/app/styles')],
+        use: [
+          {loader: 'isomorphic-style-loader'},
+          {loader: 'css-loader', options: {modules: true, localIdentName: '[local]__[hash:base64:5]'}},
+          {loader: 'sass-loader'},
         ],
       },
     ]

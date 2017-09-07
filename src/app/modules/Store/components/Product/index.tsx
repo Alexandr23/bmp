@@ -3,7 +3,7 @@ const {PureComponent} = React;
 import {IProduct} from '../../models/catalog';
 
 /* Styles */
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 export const cx = classNames.bind(style);
 

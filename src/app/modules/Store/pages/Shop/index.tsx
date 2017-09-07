@@ -8,6 +8,8 @@ interface IProps {
 
 
 class Shop extends PureComponent<IProps, null> {
+  props: IProps;
+
   render() {
     return (
       <div>

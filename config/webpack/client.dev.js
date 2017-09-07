@@ -56,8 +56,8 @@ module.exports = {
         use: ['react-hot-loader/webpack', 'ts-loader'],
       },
       {
-        test: /\.less$/,
-        include: [/node_modules/, path.resolve('./src/app/styles')],
+        test: /\.less/,
+        include: /node_modules/,
         use: [
           'style-loader',
           'css-loader',
@@ -65,7 +65,16 @@ module.exports = {
         ],
       },
       {
-        test: /\.less$/,
+        test: /\.scss/,
+        include: path.resolve('./src/app/styles'),
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+      },
+      {
+        test: /\.scss/,
         exclude: [/node_modules/, path.resolve('./src/app/styles')],
         use: [
           'style-loader',
@@ -76,7 +85,7 @@ module.exports = {
               localIdentName: '[local]__[hash:base64:5]'
             }
           },
-          'less-loader'
+          'sass-loader'
         ],
       },
       {
@@ -89,7 +98,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|svg|gif)$/i,
-        use: ['url-loader?limit=5000&name=img/[name].[ext]'],
+        use: ['url-loader?limit=5000&name=image/[name].[ext]'],
       },
     ]
   }

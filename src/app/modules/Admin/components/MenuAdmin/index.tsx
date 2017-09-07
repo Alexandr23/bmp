@@ -23,7 +23,7 @@ class MenuAdmin extends PureComponent<IProps, any> {
   render() {
     let currentEntity = ENTITY.catalog;
     Object.keys(ENTITY).forEach(key => {
-      currentEntity = this.props.location.pathname.indexOf(ENTITY[key]) !== -1 ? ENTITY[key] : currentEntity;
+      currentEntity = (this.props.location.pathname as string).indexOf(ENTITY[key]) !== -1 ? ENTITY[key] : currentEntity;
     });
 
     return (

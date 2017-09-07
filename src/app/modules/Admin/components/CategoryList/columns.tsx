@@ -4,7 +4,7 @@ import {Icon} from 'antd';
 import {ICategory} from "../../models/category";
 import {Link} from 'react-router';
 
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 const cx = classNames.bind(style);
 

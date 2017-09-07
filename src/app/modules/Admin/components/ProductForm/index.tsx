@@ -2,7 +2,7 @@ import * as React from 'react';
 const {PureComponent} = React;
 import {IProductState} from '../../models/product';
 import {LAYOUT_MAIN, LAYOUT_BUTTON} from './layouts';
-import './style.less';
+import './style.scss';
 
 /* Ant Forms */
 import {Form, Input, Button} from 'antd';

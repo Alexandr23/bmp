@@ -11,7 +11,7 @@ import 'antd/dist/antd.less';
 import MenuAdmin from '../MenuAdmin';
 
 /* Styles */
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 export const cx = classNames.bind(style);
 

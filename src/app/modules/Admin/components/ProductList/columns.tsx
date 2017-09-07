@@ -3,7 +3,7 @@ import {ColumnProps} from "antd/lib/table/Column";
 import {IProduct} from "../../models/product";
 import {Link} from 'react-router';
 
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 const cx = classNames.bind(style);
 

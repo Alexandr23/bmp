@@ -6,7 +6,7 @@ import {IState} from "models/store";
 import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
 import {columns} from './columns';
-import './style.less';
+import './style.scss';
 
 
 interface IProps {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {ICatalogState} from '../../models/catalog';
-import './style.less';
+import './style.scss';
 import {LAYOUT_MAIN, LAYOUT_BUTTON} from './layouts';
 
 /* Ant Forms */

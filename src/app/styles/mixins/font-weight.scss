@@ -1,0 +1,9 @@
+@mixin font-weight ($font-weight) {
+  @if $font-weight == light {
+    font-weight: 200;
+  } @else if $font-weight == normal {
+    font-weight: 400;
+  } @else if $font-weight == bold {
+    font-weight: 600;
+  }
+}

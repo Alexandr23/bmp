@@ -1,7 +1,7 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {ICategoryState} from '../../models/category';
-import './style.less';
+import './style.scss';
 
 /* Ant Forms */
 import { Form, Input, Tooltip, Icon, Checkbox, Button } from 'antd';

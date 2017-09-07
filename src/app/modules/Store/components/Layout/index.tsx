@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 const {PureComponent} = React;
 
 /* Styles */
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 export const cx = classNames.bind(style);
 

@@ -4,7 +4,7 @@ import {Tree} from 'antd';
 const TreeNode = Tree.TreeNode;
 
 /* Styles */
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 const cx = classNames.bind(style);
 
@@ -20,12 +20,12 @@ class CatalogCategoryTree extends PureComponent {
   static renderTreeNode = (category) => {
     if (category.sub && category.sub.length > 0) {
       return (
-        <TreeNode title={<CategoryTitle category={category} />} id={category.id}>
+        <TreeNode key={category.id} title={<CategoryTitle category={category} />} id={category.id}>
           {category.sub.map(category => CatalogCategoryTree.renderTreeNode(category))}
         </TreeNode>
       );
     } else {
-      return <TreeNode title={<CategoryTitle category={category} />} id={category.id} />;
+      return <TreeNode key={category.id} title={<CategoryTitle category={category} />} id={category.id} />;
     }
   };
 
@@ -33,10 +33,7 @@ class CatalogCategoryTree extends PureComponent {
     const categoryList = [
       {id: '1', title: 'Печенье', sub: [
         {id: '9', title: 'Печенье Яшкино'},
-        {id: '10', title: 'Печенье Бонди', sub: [
-          {id: '9', title: 'Печенье Яшкино'},
-          {id: '10', title: 'Печенье Бонди'},
-        ]},
+        {id: '10', title: 'Печенье Бонди'},
       ]},
       {id: '2', title: 'Вафли'},
       {id: '3', title: 'Круассаны'},
@@ -49,7 +46,7 @@ class CatalogCategoryTree extends PureComponent {
 
     return (
       <Tree
-        defaultExpandedKeys={['0-0']}
+        defaultExpandedKeys={['1']}
         defaultSelectedKeys={['9']}
         onSelect={this.onSelect}
         onCheck={this.onCheck}

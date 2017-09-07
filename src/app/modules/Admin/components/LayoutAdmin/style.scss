@@ -1,4 +1,4 @@
-@asideSize: 300px;
+$asideSize: 300px;
 
 
 .layout {
@@ -26,10 +26,10 @@
 }
 
 .sider {
-  flex: 0 0 @asideSize !important;
-  max-width: @asideSize !important;
-  min-width: @asideSize !important;
-  width: @asideSize !important;
+  flex: 0 0 $asideSize !important;
+  max-width: $asideSize !important;
+  min-width: $asideSize !important;
+  width: $asideSize !important;
   background: #ffffff;
   margin-right: 10px;
 }

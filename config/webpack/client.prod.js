@@ -10,6 +10,7 @@ module.exports = {
   output: {
     path: path.resolve('./dist/'),
     filename: '[name].js?v=[hash]',
+    publicPath: '/',
   },
 
   resolve: {
@@ -42,18 +43,7 @@ module.exports = {
         use: 'ts-loader',
       },
       {
-        test: /\.css/,
-        include: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {loader: 'css-loader'},
-          ],
-          publicPath: "/dist",
-        }),
-      },
-      {
-        test: /\.less$/,
+        test: /\.less/,
         include: /node_modules/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
@@ -61,12 +51,24 @@ module.exports = {
             {loader: 'css-loader'},
             {loader: 'less-loader'},
           ],
-          publicPath: "/dist",
+          publicPath: "/",
         }),
       },
       {
-        test: /\.less$/,
-        exclude: /node_modules/,
+        test: /\.scss/,
+        include: path.resolve('./src/app/styles'),
+        use: ExtractTextPlugin.extract({
+          fallback : "style-loader",
+          use: [
+            {loader: 'css-loader'},
+            {loader: 'sass-loader'},
+          ],
+          publicPath: "/",
+        }),
+      },
+      {
+        test: /\.scss/,
+        exclude: [/node_modules/, path.resolve('./src/app/styles')],
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: [
@@ -77,9 +79,9 @@ module.exports = {
                 localIdentName: '[local]__[hash:base64:5]'
               }
             },
-            'less-loader'
+            'sass-loader'
           ],
-          publicPath: "/dist",
+          publicPath: "/",
         }),
       },
       {
@@ -92,7 +94,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|svg|gif)$/i,
-        use: ['url-loader?limit=5000&name=img/[name].[ext]'],
+        use: ['url-loader?limit=5000&name=image/[name].[ext]'],
       },
     ]
   }

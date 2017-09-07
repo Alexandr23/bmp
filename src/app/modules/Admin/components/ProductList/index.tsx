@@ -6,10 +6,9 @@ import {IState} from "models/store";
 import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
 import {columns} from './columns';
-import './style.less';
 
 /* Styles */
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 const cx = classNames.bind(style);
 
@@ -21,6 +20,8 @@ class ProductTable extends Table<IProduct> {}
 
 
 class ProductList extends PureComponent<IProps, null> {
+  props: IProps;
+
   public render () {
     const {list} = this.props.productList;
     const pagination:PaginationProps = {

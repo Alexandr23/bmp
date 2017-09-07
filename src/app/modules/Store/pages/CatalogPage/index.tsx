@@ -7,7 +7,7 @@ import Layout from '../../components/Layout';
 import Product from '../../components/Product';
 
 /* Styles */
-const style = require('./style.less');
+const style = require('./style.scss');
 const classNames = require('classnames/bind');
 export const cx = classNames.bind(style);
 

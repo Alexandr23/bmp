@@ -6,7 +6,7 @@ const BreadcrumbItem = Breadcrumb.Item;
 import CategoryList from '../../components/CategoryList';
 
 /* Styles from AdminLayout */
-const style = require('../../components/LayoutAdmin/style.less');
+const style = require('../../components/LayoutAdmin/style.scss');
 const classNames = require('classnames/bind');
 export const cx = classNames.bind(style);
 
