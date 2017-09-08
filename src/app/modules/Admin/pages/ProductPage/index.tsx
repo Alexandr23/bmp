@@ -58,7 +58,7 @@ class ProductPage extends PureComponent<IProps, IState> {
     const product: IProduct = isLoaded ? this.props.product.data : {};
 
     return (
-      <div>
+      <Layout className={cx('main')}>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem><Link to="/admin/product/list">Товары</Link></BreadcrumbItem>
           <BreadcrumbItem>{isLoaded ? product.attributes.short_name : ''}</BreadcrumbItem>
@@ -76,7 +76,7 @@ class ProductPage extends PureComponent<IProps, IState> {
             <ProductForm product={this.props.product} onSubmit={this.productUpdate} />
           </div>
         </Content>
-      </div>
+      </Layout>
     );
   }
 }

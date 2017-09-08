@@ -37,7 +37,7 @@ class CatalogCreatePage extends PureComponent<IProps, any> {
 
   render() {
     return (
-      <div>
+      <Layout className={cx('main')}>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem><Link to="/admin/catalog/list">Каталоги</Link></BreadcrumbItem>
           <BreadcrumbItem>Создание каталога</BreadcrumbItem>
@@ -52,7 +52,7 @@ class CatalogCreatePage extends PureComponent<IProps, any> {
             <CatalogForm onSubmit={this.catalogCreate} />
           </div>
         </Content>
-      </div>
+      </Layout>
     );
   }
 }

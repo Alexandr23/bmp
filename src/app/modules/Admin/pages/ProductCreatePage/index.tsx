@@ -37,7 +37,7 @@ class ProductCreatePage extends PureComponent<IProps, any> {
 
   render() {
     return (
-      <div>
+      <Layout className={cx('main')}>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem><Link to="/admin/product/list">Товары</Link></BreadcrumbItem>
           <BreadcrumbItem>Создание товара</BreadcrumbItem>
@@ -52,7 +52,7 @@ class ProductCreatePage extends PureComponent<IProps, any> {
             <ProductForm onSubmit={this.createProduct} />
           </div>
         </Content>
-      </div>
+      </Layout>
     );
   }
 }

@@ -42,6 +42,18 @@ class CatalogCategoryTree extends PureComponent {
       {id: '6', title: 'Зефир'},
       {id: '7', title: 'Семечки'},
       {id: '8', title: 'Крекеры'},
+      {id: '11', title: 'Вафли'},
+      {id: '12', title: 'Круассаны'},
+      {id: '13', title: 'Конфеты', sub: [
+        {id: '14', title: 'Драже'},
+        {id: '15', title: 'Зефир', sub: [
+          {id: '16', title: 'Семечки'},
+          {id: '17', title: 'Крекеры'},
+          {id: '18', title: 'Зефир'},
+          {id: '19', title: 'Семечки'},
+          {id: '20', title: 'Крекеры'},
+        ]},
+      ]},
     ];
 
     return (
@@ -59,7 +71,7 @@ class CatalogCategoryTree extends PureComponent {
 
 const CategoryTitle = ({category}) => (
   <div className={cx('category')}>
-    <div className={cx('category__image', 'category__image_' + category.id)} />
+    <div className={cx('category__image', `category__image_${category.id % 10 + 1}`)} />
     <div className={cx('category__title')}>{category.title}</div>
   </div>
 );

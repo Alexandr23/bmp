@@ -24,7 +24,7 @@ class CategoryPage extends PureComponent<IProps, null> {
     const {title} = this.props.category.data;
 
     return (
-      <div>
+      <Layout className={cx('main')}>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem>Каталог</BreadcrumbItem>
           <BreadcrumbItem><Link to="/admin/category/list">Категории товаров</Link></BreadcrumbItem>
@@ -40,7 +40,7 @@ class CategoryPage extends PureComponent<IProps, null> {
             <CategoryForm category={this.props.category} />
           </div>
         </Content>
-      </div>
+      </Layout>
     );
   }
 }

@@ -20,7 +20,7 @@ interface IProps {
 class CatalogListPage extends PureComponent<IProps, null> {
   render() {
     return (
-      <div>
+      <Layout className={cx('main')}>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem>Каталоги</BreadcrumbItem>
         </Breadcrumb>
@@ -37,7 +37,7 @@ class CatalogListPage extends PureComponent<IProps, null> {
             <CatalogList />
           </div>
         </Content>
-      </div>
+      </Layout>
     );
   }
 }
