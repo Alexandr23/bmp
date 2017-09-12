@@ -21,19 +21,19 @@ class CategoryPage extends PureComponent<IProps, null> {
   props: IProps;
 
   render() {
-    const {title} = this.props.category.data;
+    const {name} = this.props.category.data.attributes;
 
     return (
       <Layout className={cx('main')}>
         <Breadcrumb className={cx('breadcrumb')}>
           <BreadcrumbItem>Каталог</BreadcrumbItem>
           <BreadcrumbItem><Link to="/admin/category/list">Категории товаров</Link></BreadcrumbItem>
-          <BreadcrumbItem>{title}</BreadcrumbItem>
+          <BreadcrumbItem>{name}</BreadcrumbItem>
         </Breadcrumb>
 
         <Content className={cx('content')}>
           <div className={cx('content__header')}>
-            <h1 className={cx('title')}>Категория "{title}"</h1>
+            <h1 className={cx('title')}>Категория "{name}"</h1>
           </div>
 
           <div className={cx('content__body')}>

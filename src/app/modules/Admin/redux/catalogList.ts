@@ -13,9 +13,9 @@ const INITIAL_STATE: ICatalogListState = {
   isLoading: false,
   isLoaded: false,
   pagination: {
-    page: 1,
+    number: 1,
     total: 0,
-    perPage: 20,
+    size: 20,
   },
 };
 
@@ -55,7 +55,7 @@ export function CatalogListReducer (state = INITIAL_STATE, action: ICatalogListA
 export const catalogListGet = (params?:any) => {
   return (dispatch: any) => {
     dispatch(catalogListGetRequest());
-    return apiCatalog.getCatalogList({...params, short_name: 'test'})
+    return apiCatalog.getCatalogList({...params})
       .then((response: AxiosResponse) => dispatch((catalogListGetSuccess)(response)))
       .catch((error: AxiosError) => dispatch((catalogListGetFailure)(error)));
   };

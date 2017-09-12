@@ -13,9 +13,9 @@ const INITIAL_STATE: IProductListState = {
   isLoading: false,
   isLoaded: false,
   pagination: {
-    page: 1,
+    number: 1,
     total: 0,
-    perPage: 20,
+    size: 20,
   },
 };
 

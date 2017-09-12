@@ -1,0 +1,39 @@
+.wrap {
+  display: flex;
+  padding: 20px;
+}
+
+.section {
+
+}
+.section_image {
+  width: 80px;
+  padding-right: 20px;
+}
+.section_title {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+}
+.section_buttons {
+  min-width: 220px;
+  width: 220px;
+  text-align: right;
+}
+
+.image {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ff1b41 url('../../components/LayoutAdmin/img/logo.svg') center no-repeat;
+  background-size: 80% 80%;
+}
+
+.shop {width: 100%;}
+
+.button {
+  &+& {margin-left: 10px;}
+}

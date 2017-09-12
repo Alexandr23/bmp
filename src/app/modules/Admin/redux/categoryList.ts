@@ -11,9 +11,9 @@ export const CATEGORY_LIST_GET_FAILURE: string = 'CATEGORY_LIST_GET_FAILURE';
 const INITIAL_STATE: ICategoryListState = {
   list: [],
   pagination: {
-    page: 1,
     total: 0,
-    perPage: 20,
+    number: 1,
+    size: 20,
   },
   isLoading: false,
   isLoaded: false,
@@ -34,6 +34,7 @@ export function CategoryListReducer (state = INITIAL_STATE, action: ICategoryLis
       return {
         ...state,
         list: payload.list,
+        pagination: payload.pagination,
         isLoading: false,
         isLoaded: true,
       };
@@ -52,7 +53,7 @@ export function CategoryListReducer (state = INITIAL_STATE, action: ICategoryLis
 
 
 /** Action Creators */
-export const categoryListGet = (params: ICategory) => {
+export const categoryListGet = (params?: any) => {
   return (dispatch: any) => {
     dispatch(categoryListGetRequest());
     return apiCategory.getCategoryList(params)
@@ -69,10 +70,17 @@ export function categoryListGetRequest(): ICategoryListAction {
 }
 
 export function categoryListGetSuccess(payload: AxiosResponse): ICategoryListAction {
+  const page = payload.data.meta.page;
+
   return {
     type: CATEGORY_LIST_GET_SUCCESS,
     payload: {
-      list: payload.data,
+      list: payload.data.data,
+      pagination: {
+        total: page['total-items'],
+        number: page['current-page-number'],
+        size: page['current-page-size'],
+      },
     },
   };
 }

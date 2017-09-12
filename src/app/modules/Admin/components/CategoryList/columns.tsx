@@ -10,37 +10,32 @@ const cx = classNames.bind(style);
 
 
 export const columns: ColumnProps<any>[] = [
-  {
-    title: 'image',
-    dataIndex: 'thumbnailUrl',
-    key: 'thumbnailUrl',
-    width: '60px',
-    render: (text: string, record: ICategory) => (
-      <img className={cx('category__image')} src={record.thumbnailUrl} alt={record.title} title={record.title} />
-    )
-  },
-  {
-    title: 'albumId',
-    dataIndex: 'albumId',
-    key: 'albumId',
-  },
+
   {
     title: 'id',
     dataIndex: 'id',
     key: 'id',
   },
   {
-    title: 'title',
-    dataIndex: 'title',
-    key: 'title',
+    title: 'Название',
+    dataIndex: 'name',
+    key: 'name',
+    render: (text: string, record: ICategory) => <div>{record.attributes.name}</div>,
   },
   {
-    title: 'url',
-    dataIndex: 'url',
-    key: 'url',
+    title: 'Описание',
+    dataIndex: 'description',
+    key: 'description',
+    render: (text: string, record: ICategory) => <div>{record.attributes.description}</div>,
   },
   {
-    title: 'edit',
+    title: 'Активен',
+    dataIndex: 'is_active',
+    key: 'is_active',
+    render: (text: string, record: ICategory) => <div>{record.attributes.is_active ? 'Да' : 'Нет'}</div>,
+  },
+  {
+    title: '',
     dataIndex: 'edit',
     key: 'edit',
     width: '40px',

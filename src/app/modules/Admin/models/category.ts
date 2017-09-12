@@ -4,11 +4,21 @@ import {AxiosError} from "axios";
 
 /* Category interfaces */
 export interface ICategory {
-  albumId?: number;
-  id?: number;
-  title?: string;
-  url?: string;
-  thumbnailUrl?: string;
+  type: string;
+  id: string;
+  attributes: {
+    catalog_id: number;
+    creator_id: number | null;
+    date_created: string | null;
+    date_updated: string | null;
+    description: string;
+    is_active: boolean;
+    name: string;
+    parent_id: number | null;
+    updater_id: number | null;
+  }
+  links: any;
+  relationships: any;
   key?: string;
 }
 
@@ -21,7 +31,7 @@ export interface ICategoryAction {
 }
 
 export interface ICategoryState {
-  data?: ICategory;
+  data?: Partial<ICategory>;
   isLoading?: boolean;
   isLoaded?: boolean;
 }

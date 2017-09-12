@@ -8,7 +8,13 @@ const style = require('./style.scss');
 const classNames = require('classnames/bind');
 const cx = classNames.bind(style);
 
-class CatalogCategoryTree extends PureComponent {
+interface IProps {
+  tree: any;
+}
+
+class CatalogCategoryTree extends PureComponent<IProps> {
+  props: IProps;
+
   onSelect = (data, e) => {
     console.log(data, e);
   };
@@ -30,7 +36,7 @@ class CatalogCategoryTree extends PureComponent {
   };
 
   public render () {
-    const categoryList = [
+    const categoryTree = [
       {id: '1', title: 'Печенье', sub: [
         {id: '9', title: 'Печенье Яшкино'},
         {id: '10', title: 'Печенье Бонди'},
@@ -63,7 +69,7 @@ class CatalogCategoryTree extends PureComponent {
         onSelect={this.onSelect}
         onCheck={this.onCheck}
       >
-        {categoryList.length && categoryList.map(category => CatalogCategoryTree.renderTreeNode(category))}
+        {categoryTree.length && categoryTree.map(category => CatalogCategoryTree.renderTreeNode(category))}
       </Tree>
     );
   }

@@ -54,7 +54,7 @@ class CategoryForm extends PureComponent<IProps, any> {
       <Form onSubmit={this.handleSubmit} style={{maxWidth: '600px'}}>
         <FormItem {...formItemLayout} label="Название" hasFeedback>
           {getFieldDecorator('name', {
-            initialValue: this.props.category.data.title ,
+            initialValue: this.props.category.data.attributes.name,
             rules: [{required: true, message: 'Введите название категории'}],
           })(
             <Input />

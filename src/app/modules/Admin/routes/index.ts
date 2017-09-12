@@ -76,7 +76,15 @@ export default (store: Store<IState>) => {
         path: 'category/list',
         component: CategoryListPage,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(categoryListGet({albumId: 1})).then(() => callback());
+          console.log(nextState);
+          const params = {
+            page: {
+              number: nextState.location.query.page,
+              size: nextState.location.query.size,
+            }
+          };
+
+          store.dispatch(categoryListGet(params)).then(() => callback());
         },
       },
       {

@@ -13,6 +13,7 @@ const TextArea = Input.TextArea;
 interface IProps {
   form?: any;
   catalog?: ICatalogState;
+  buttons: boolean;
   onSubmit: (form: Object) => void;
 }
 
@@ -51,7 +52,7 @@ class CategoryForm extends PureComponent<IProps, any> {
 
     return (
       <Form onSubmit={this.handleSubmit} style={{maxWidth: '600px'}}>
-        <FormItem {...LAYOUT_MAIN} label="Название" hasFeedback>
+        <FormItem label="Название" hasFeedback>
           {getFieldDecorator('name', {
             initialValue: isLoaded ? catalog.attributes.name : '',
             rules: [{required: true, message: 'Введите название каталога'}],
@@ -60,16 +61,16 @@ class CategoryForm extends PureComponent<IProps, any> {
           )}
         </FormItem>
 
-        <FormItem {...LAYOUT_MAIN} label="Описание" hasFeedback>
+        <FormItem label="Описание" hasFeedback>
           {getFieldDecorator('description', {
             initialValue: isLoaded ? catalog.attributes.description : '',
             rules: [{required: true, message: 'Введите описание каталога'}],
           })(
-            <TextArea />
+            <TextArea autosize={{ minRows: 3, maxRows: 6 }} />
           )}
         </FormItem>
 
-        <FormItem {...LAYOUT_MAIN} label="Активен">
+        <FormItem label="Активен">
           {getFieldDecorator('is_active', {
             initialValue: isLoaded ? catalog.attributes.is_active : false,
             rules: [{required: true, message: 'Укажите активность каталога'}],
@@ -79,9 +80,9 @@ class CategoryForm extends PureComponent<IProps, any> {
           )}
         </FormItem>
 
-        <FormItem {...LAYOUT_BUTTON}>
+        {this.props.buttons && <FormItem>
           <Button type="primary" htmlType="submit">Сохранить</Button>
-        </FormItem>
+        </FormItem>}
       </Form>
     );
   }

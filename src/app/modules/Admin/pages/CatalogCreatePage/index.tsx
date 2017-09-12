@@ -49,7 +49,7 @@ class CatalogCreatePage extends PureComponent<IProps, any> {
           </div>
 
           <div className={cx('content__body')}>
-            <CatalogForm onSubmit={this.catalogCreate} />
+            <CatalogForm onSubmit={this.catalogCreate} buttons />
           </div>
         </Content>
       </Layout>
