@@ -16,7 +16,7 @@ import ProductListPage from '../pages/ProductListPage';
 import ProductCreatePage from '../pages/ProductCreatePage';
 
 /* Redux */
-import {categoryListGet} from '../redux/categoryList';
+import {categoryListGet, onPagination as onPaginationCategoryList, onFilter as onFilterCategoryList} from '../redux/categoryList';
 import {catalogListGet} from '../redux/catalogList';
 import {catalogGet} from '../redux/catalog';
 import {categoryGet} from '../redux/category';
@@ -27,6 +27,7 @@ import {productListGet} from '../redux/prodictList';
 import {Store} from 'redux';
 import {IState} from 'models/store';
 
+import {queryToFPS} from '../../../helpers/apiHelper';
 
 export default (store: Store<IState>) => {
   const isClient = typeof window !== 'undefined';
@@ -76,13 +77,10 @@ export default (store: Store<IState>) => {
         path: 'category/list',
         component: CategoryListPage,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          console.log(nextState);
-          const params = {
-            page: {
-              number: nextState.location.query.page,
-              size: nextState.location.query.size,
-            }
-          };
+          const params = queryToFPS(nextState.location.query);
+
+          // Object.keys(params.pagination).length && store.dispatch(onPaginationCategoryList(params.pagination));
+          // Object.keys(params.filter).length && store.dispatch(onFilterCategoryList(params.filter));
 
           store.dispatch(categoryListGet(params)).then(() => callback());
         },

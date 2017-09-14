@@ -1,9 +1,11 @@
 import * as React from 'react';
+
+
 const mainConfig = require('../../config/main');
 const publicPath = 'http://' + mainConfig.host + ':' + (+mainConfig.port + 1);
-
-
 const IS_DEV = process.env.NODE_ENV === 'development';
+
+
 interface IHtmlProps {
   manifest?: any;
   markup?: string;

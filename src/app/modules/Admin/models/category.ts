@@ -40,16 +40,14 @@ export interface ICategoryState {
 /* CategoryList interfaces */
 export interface ICategoryListAction {
   type: string;
-  payload?: {
-    list?: ICategory[];
-    pagination?: IPagination;
-    error?: AxiosError;
-  };
+  payload?: any;
 }
 
 export interface ICategoryListState {
   list: ICategory[];
-  pagination: IPagination;
   isLoading: boolean;
   isLoaded: boolean;
+  pagination: IPagination;
+  filter?: any;
+  sort?: any;
 }

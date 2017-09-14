@@ -1,4 +1,3 @@
-import axios from 'axios';
 import request from '../../../services/request';
 import {objectToFilter, objectToPage} from '../../../helpers/apiHelper';
 
@@ -6,9 +5,10 @@ import {objectToFilter, objectToPage} from '../../../helpers/apiHelper';
 /**
  * api-метод получения Списка Категорий
  */
-export const getCategoryList = (params: {filter?: Object, page?: Object}) => {
-  const data = {...objectToFilter(params.filter || {}), ...objectToPage(params.page || {})};
-  return request.get('categories', {params: data});
+export const getCategoryList = ({pagination = {}, filter = {}, sort = {}}) => {
+  console.log('filter for API: ', filter);
+
+  return request.get('categories', {params: {...objectToPage(pagination), ...objectToFilter(filter)}})
 };
 
 
