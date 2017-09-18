@@ -52,7 +52,10 @@ export default (store: Store<IState>) => {
         path: 'catalog/:id',
         component: CatalogPage,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(catalogGet({id: nextState.params.id})).then(() => callback());
+          Promise.all([
+            store.dispatch(catalogGet({id: nextState.params.id})),
+            store.dispatch(categoryListGet({filter: {catalog_id: nextState.params.id}}))
+          ]).then(() => callback());
         },
       },
       {

@@ -1,8 +1,11 @@
 import * as React from 'react';
 const {PureComponent} = React;
+import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import {IState as IStore} from 'models/store';
 import ProductList from '../../components/ProductList';
 import {cx} from '../../components/LayoutAdmin';
+import {IProductListState} from "../../models/product";
 
 /* AntDesign */
 import {Layout, Breadcrumb, Button} from 'antd';
@@ -12,10 +15,11 @@ const BreadcrumbItem = Breadcrumb.Item;
 
 interface IProps {
   children: any;
+  productList: IProductListState;
 }
 
 
-class ProductListPage extends PureComponent<IProps, null> {
+class ProductListPage extends PureComponent<IProps> {
   render() {
     return (
       <Layout className={cx('main')}>
@@ -32,7 +36,7 @@ class ProductListPage extends PureComponent<IProps, null> {
           </div>
 
           <div className={cx('content__body')}>
-            <ProductList />
+            <ProductList productList={this.props.productList} />
           </div>
         </Content>
       </Layout>
@@ -40,4 +44,6 @@ class ProductListPage extends PureComponent<IProps, null> {
   }
 }
 
-export default ProductListPage;
+export default (connect as any)((state: IStore) => ({
+  productList: state.admin.productList,
+}))(ProductListPage);

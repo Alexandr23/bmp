@@ -36,13 +36,8 @@ class CatalogMain extends PureComponent<IProps, IState> {
     };
   }
 
-  editModalOpen = () => {
-    this.setState({isEditModal: true});
-  };
-
-  editModalClose = () => {
-    this.setState({isEditModal: false});
-  };
+  editModalOpen = () => this.setState({isEditModal: true});
+  editModalClose = () => this.setState({isEditModal: false});
 
   catalogUpdate = (data: any) => {
     const dataPrepared = {data: {attributes: data}};

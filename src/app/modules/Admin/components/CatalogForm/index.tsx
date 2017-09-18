@@ -2,7 +2,6 @@ import * as React from 'react';
 const {PureComponent} = React;
 import {ICatalogState} from '../../models/catalog';
 import './style.scss';
-import {LAYOUT_MAIN, LAYOUT_BUTTON} from './layouts';
 
 /* Ant Forms */
 import {Form, Input, Button, Switch} from 'antd';
@@ -18,9 +17,7 @@ interface IProps {
 }
 
 
-class CategoryForm extends PureComponent<IProps, any> {
-  props: IProps;
-
+class CategoryForm extends PureComponent<IProps> {
   isValid = (data) => {
     let isValid = true;
 

@@ -19,9 +19,7 @@ interface IProps {
 class ProductTable extends Table<IProduct> {}
 
 
-class ProductList extends PureComponent<IProps, null> {
-  props: IProps;
-
+class ProductList extends PureComponent<IProps> {
   public render () {
     const {list} = this.props.productList;
     const pagination:PaginationProps = {
@@ -54,7 +52,4 @@ class ProductList extends PureComponent<IProps, null> {
 }
 
 
-const mapStateToProps = (state: IState) => ({
-  productList: state.admin.productList,
-});
-export default (connect as any)(mapStateToProps, {})(ProductList);
+export default ProductList;
