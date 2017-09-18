@@ -86,14 +86,8 @@ class CatalogPage extends PureComponent<IProps, IState> {
           <Layout>
             <Content className={cx('content')}>
               <div className={cx('content__header')}>
-                <Title size={Sizes.h3}>Товары</Title>
+                <Title size={Sizes.h3}>Товары категории</Title>
                 {!this.state.isProductAdd && <Button size="small" type="primary" icon="plus" ghost onClick={this.toggleProductAdd}>Добавить товары в категорию</Button>}
-                {this.state.isProductAdd && (
-                 <div>
-                   <Button  style={{'marginRight': '10px'}} size="small" type="primary" ghost onClick={this.toggleProductAdd}>Отменить</Button>
-                   <Button size="small" type="primary" onClick={this.toggleProductAdd}>Сохранить изменения</Button>
-                 </div>
-                )}
               </div>
 
               <div className={cx('content__body')}>
@@ -102,14 +96,31 @@ class CatalogPage extends PureComponent<IProps, IState> {
                     <Search style={{'marginBottom': '20px'}} onSearch={value => console.log(value)} />
                     <ProductList />
                   </div>
-                  {this.state.isProductAdd && <div style={{width: '100%', marginLeft: '24px'}}>
-                    <Search style={{'marginBottom': '20px'}} onSearch={value => console.log(value)} />
-                    <ProductList />
-                  </div>}
                 </div>
               </div>
             </Content>
           </Layout>
+
+          {this.state.isProductAdd && <Layout style={{borderLeft: '1px solid #ececec'}}>
+            <Content className={cx('content')}>
+              <div className={cx('content__header')}>
+                <Title size={Sizes.h3}>Все товары</Title>
+                {this.state.isProductAdd && <div>
+                   <Button  style={{'marginRight': '10px'}} size="small" type="primary" ghost onClick={this.toggleProductAdd}>Отменить</Button>
+                   <Button size="small" type="primary" onClick={this.toggleProductAdd}>Сохранить изменения</Button>
+                 </div>}
+              </div>
+
+              <div className={cx('content__body')}>
+                <div style={{display: 'flex'}}>
+                  <div style={{width: '100%'}}>
+                    <Search style={{'marginBottom': '20px'}} onSearch={value => console.log(value)} />
+                    <ProductList />
+                  </div>
+                </div>
+              </div>
+            </Content>
+          </Layout>}
         </Layout>
       </Layout>
     );

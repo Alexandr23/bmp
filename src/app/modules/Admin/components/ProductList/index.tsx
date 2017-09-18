@@ -26,7 +26,7 @@ class ProductList extends PureComponent<IProps, null> {
     const {list} = this.props.productList;
     const pagination:PaginationProps = {
       total: list.length,
-      pageSize: 10,
+      pageSize: 20,
       showSizeChanger: true,
       pageSizeOptions: ['10', '20', '50', '100'],
     };
@@ -34,9 +34,20 @@ class ProductList extends PureComponent<IProps, null> {
     // set rowKey
     list.map(item => item.key = '' + item.id);
 
+
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User',
+      }),
+    };
+
+
     return (
       <div className={cx('table')}>
-        <ProductTable bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
+        <ProductTable rowSelection={rowSelection} dataSource={list} columns={columns} size="small" pagination={pagination} scroll={{ y: true }} />
       </div>
     );
   }
