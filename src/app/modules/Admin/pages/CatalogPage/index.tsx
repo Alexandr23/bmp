@@ -89,7 +89,9 @@ class CatalogPage extends PureComponent<IProps, IState> {
               <div className={cx('content__header')}>
                 <Title size={Sizes.h3}>Категории</Title>
                 <Button size="small" type="primary" icon="plus" ghost onClick={this.categoryCreateModalOpen}>Добавить</Button>
-                {this.state.isCategoryCreateModal && <CategoryCreateModal onCancel={this.categoryCreateModalClose} onCreate={this.onCategoryCreate} />}
+                {this.state.isCategoryCreateModal && <CategoryCreateModal catalogId={catalog.data.id}
+                                                                          onCancel={this.categoryCreateModalClose}
+                                                                          onCreate={this.onCategoryCreate} />}
               </div>
 
               <div className={cx('content__body')}>

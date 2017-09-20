@@ -20,5 +20,6 @@ export interface IState {
     catalogList?: ICatalogListState;
     product?: IProductState;
     productList?: IProductListState;
+    categoryListAutoComplete?: ICategoryListState;
   }
 }

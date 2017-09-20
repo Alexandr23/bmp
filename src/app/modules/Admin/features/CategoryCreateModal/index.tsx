@@ -3,6 +3,7 @@ const {PureComponent} = React;
 import {connect} from 'react-redux';
 import CategoryForm from '../../components/CategoryForm';
 import {categoryCreate} from '../../redux/category';
+import {categoryListGet} from '../../redux/categoryList';
 
 /* Ant Forms */
 import {message, Modal} from 'antd';
@@ -10,8 +11,10 @@ import {message, Modal} from 'antd';
 
 interface IProps {
   categoryCreate: (data: any) => any;
+  categoryListGet: (params: any) => any;
   onCancel?: () => any;
   onCreate?: () => any;
+  catalogId: number;
 }
 
 
@@ -43,10 +46,12 @@ class CategoryCreateModal extends PureComponent<IProps> {
              visible={true}
              onCancel={this.onCancel}
              footer="">
-        <CategoryForm onSubmit={this.onSubmit} />
+        <CategoryForm onSubmit={this.onSubmit}
+                      catalogId={this.props.catalogId}
+                      categoryListGet={this.props.categoryListGet} />
       </Modal>
     );
   }
 }
 
-export default (connect as any)(null, {categoryCreate})(CategoryCreateModal);
+export default (connect as any)(null, {categoryCreate, categoryListGet})(CategoryCreateModal);

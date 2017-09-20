@@ -1,10 +1,11 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {ICategoryState} from '../../models/category';
+import CategoryListAutoComplete from '../../features/CategoryListAutoComplete';
 import './style.scss';
 
 /* Ant Forms */
-import {Form, Input, Button, Switch} from 'antd';
+import {Form, Input, Button, Switch, AutoComplete} from 'antd';
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
 
@@ -12,11 +13,24 @@ const TextArea = Input.TextArea;
 interface IProps {
   form?: any;
   category?: ICategoryState;
-  onSubmit: (data: any) => any
+  onSubmit: (data: any) => any;
+  catalogId?: number;
+}
+
+interface IState {
+  categoryList: any[];
 }
 
 
-class CategoryForm extends PureComponent<IProps> {
+class CategoryForm extends PureComponent<IProps, IState> {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      categoryList: [],
+    }
+  }
+
   isValid = (data) => {
     let isValid = true;
 
@@ -44,6 +58,11 @@ class CategoryForm extends PureComponent<IProps> {
   public render () {
     const { getFieldDecorator } = this.props.form;
 
+    const dataSource = this.state.categoryList.map(category => ({
+      value: category.id,
+      text: category.attributes.name + ' ' + category.attributes.description,
+    }));
+
     return (
       <Form onSubmit={this.onSubmit} style={{maxWidth: '600px'}}>
         <FormItem label="Название" hasFeedback>
@@ -64,6 +83,7 @@ class CategoryForm extends PureComponent<IProps> {
 
         <FormItem label="Каталог" hasFeedback>
           {getFieldDecorator('catalog_id', {
+            initialValue: this.props.catalogId || '',
             rules: [{required: true, message: 'Выберите каталог'}],
           })(
             <Input />
@@ -72,7 +92,7 @@ class CategoryForm extends PureComponent<IProps> {
 
         <FormItem label="Родительская категория" hasFeedback>
           {getFieldDecorator('parent_id')(
-            <Input />
+            <CategoryListAutoComplete catalogId={this.props.catalogId} />
           )}
         </FormItem>
 
