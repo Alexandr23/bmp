@@ -1,65 +1,58 @@
 import * as React from 'react';
 const {PureComponent} = React;
 import {connect} from 'react-redux';
-import * as _ from "lodash";
 import {ICategory, ICategoryListState} from '../../models/category';
 import {IState as IStore} from "models/store";
+import {columns} from './columns';
+import {IParams} from "../../../../models/params";
+import categoryListRedux from "../../redux/categoryList";
+
+/* Styles */
+const style = require('./style.scss');
+const classNames = require('classnames/bind');
+export const cx = classNames.bind(style);
+
+/* AntDesign*/
 import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
-import {columns} from './columns';
-import './style.scss';
-import {IPagination} from "../../../../models/pagination";
-import {categoryListGet, onPagination} from "../../redux/categoryList";
 
 
 interface IProps {
   categoryList: ICategoryListState;
-  categoryListGet: (params: any) => any;
-  onPagination: (params: any) => any;
+  categoryListGet: (params: IParams, isReplaceLocation?: boolean) => any;
+  onParams: (params: IParams) => any;
   location: any;
 }
 
-interface IState {
-  pagination: IPagination;
-}
 
 class CategoryTable extends Table<ICategory> {}
-class CategoryList extends PureComponent<IProps, IState> {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      pagination: this.props.categoryList.pagination,
-    }
-  }
-
+class CategoryList extends PureComponent<IProps> {
   componentWillReceiveProps (newProps) {
-    const pagination = newProps.categoryList.pagination;
-    const isNeedUpdate = !_.isEqual(pagination, this.props.categoryList.pagination);
-
-    console.log('isNeedUpdate = ', isNeedUpdate);
-    console.log(pagination, this.props.categoryList.pagination);
-
-    if (isNeedUpdate) {
-      this.setState({pagination});
-      this.props.categoryListGet({pagination});
-    }
+    newProps.categoryList.isForceUpdate && this.props.categoryListGet(newProps.categoryList.params, true);
   }
 
-  onChange = (page: PaginationProps, filter?: any, sorter?: any) => {
-    console.log(page, filter, sorter);
+  onChange = (page: PaginationProps) => {
+    const {params} = this.props.categoryList;
+    const newParams = {
+      ...params,
+      pagination: {
+        ...params.pagination,
+        number: page.current,
+        size: page.pageSize,
+      },
+    };
 
-    this.props.onPagination({number: page.current, size: page.pageSize});
+    this.props.categoryListGet(newParams, true);
   };
 
   public render () {
-    const {list} = this.props.categoryList;
+    const {list, params} = this.props.categoryList;
     const pagination:PaginationProps = {
-      current: this.state.pagination.number,
-      total: this.state.pagination.total,
-      pageSize: this.state.pagination.size,
+      current: params.pagination.number,
+      total: params.pagination.total,
+      pageSize: params.pagination.size,
       showSizeChanger: true,
-      pageSizeOptions: ['1','10', '20', '50', '100'],
+      pageSizeOptions: ['10', '20', '50', '100'],
     };
 
     list.map(item => item.key = '' + item.id); // set rowKey
@@ -77,4 +70,4 @@ const mapStateToProps = (state: IStore) => ({
   categoryList: state.admin.categoryList,
   location: state.routing.locationBeforeTransitions,
 });
-export default (connect as any)(mapStateToProps, {categoryListGet, onPagination})(CategoryList);
+export default (connect as any)(mapStateToProps, {categoryListGet: categoryListRedux.get})(CategoryList);

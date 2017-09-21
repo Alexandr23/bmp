@@ -1,4 +1,5 @@
 import request from '../../../services/request';
+import {paramsToApi} from '../../../helpers/apiHelper';
 
 
 /**
@@ -27,4 +28,4 @@ export const deleteProduct = (id: string) => request.delete('products/' + id);
 /**
  * Получение списка товаров
  */
-export const getProductList = (params?: Object) => request.get('products', {params});
+export const getProductList = (params?: Object) => request.get('products', {params: paramsToApi(params)});

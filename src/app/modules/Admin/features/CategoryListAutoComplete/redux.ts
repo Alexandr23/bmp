@@ -1,78 +1,72 @@
 import {AxiosResponse, AxiosError} from 'axios';
-import {replace} from 'react-router-redux';
-import {ICategory, ICategoryListAction, ICategoryListState} from '../../models/category';
+import {ICategoryListAction, ICategoryListState} from '../../models/category';
 import * as apiCategory from '../../api/category';
-import {PaginationProps} from 'antd/lib/pagination';
-import * as antHelper from '../../../../helpers/antHelper';
-import * as apiHelper from '../../../../helpers/apiHelper';
+import {IParams} from '../../../../models/params';
+import {onParamsCreator, metaToParams} from '../../../../helpers/paramsHelper';
 
 /** Action Types */
-export const CATEGORY_LIST_AUTOCOMPLETE_GET_REQUEST: string = 'CATEGORY_LIST_AUTOCOMPLETE_GET_REQUEST';
-export const CATEGORY_LIST_AUTOCOMPLETE_GET_SUCCESS: string = 'CATEGORY_LIST_AUTOCOMPLETE_GET_SUCCESS';
-export const CATEGORY_LIST_AUTOCOMPLETE_GET_FAILURE: string = 'CATEGORY_LIST_AUTOCOMPLETE_GET_FAILURE';
-
-export const PAGINATION: string = 'CATEGORY_LIST_AUTOCOMPLETE_PAGINATION';
-export const FILTER: string = 'CATEGORY_LIST_AUTOCOMPLETE_FILTER';
-export const SORT: string = 'CATEGORY_LIST_AUTOCOMPLETE_SORT';
+export const CATEGORY_LIST_GET_REQUEST  = 'feature/CategoryListAutoComplete/CATEGORY_LIST_GET_REQUEST';
+export const CATEGORY_LIST_GET_SUCCESS  = 'feature/CategoryListAutoComplete/CATEGORY_LIST_GET_SUCCESS';
+export const CATEGORY_LIST_GET_FAILURE  = 'feature/CategoryListAutoComplete/CATEGORY_LIST_GET_FAILURE';
+export const CATEGORY_LIST_PARAMS       = 'feature/CategoryListAutoComplete/CATEGORY_LIST_PARAMS';
+export const CATEGORY_LIST_FORCE_UPDATE = 'feature/CategoryListAutoComplete/CATEGORY_LIST_FORCE_UPDATE';
 
 
 /** Initial State */
 const INITIAL_STATE: ICategoryListState = {
   list: [],
-  pagination: {
-    total: 0,
-    number: 1,
-    size: 20,
+  params: {
+    pagination: {
+      total: 0,
+      number: 1,
+      size: 20,
+    },
+    filter: {},
+    sort: [],
   },
-  filter: {},
-  sort: {},
   isLoading: false,
   isLoaded: false,
+  isForceUpdate: false,
 };
 
 
 /** Reducer: CatalogReducer */
-export function CategoryListAutoCompleteReducer (state = INITIAL_STATE, action: ICategoryListAction) {
+export function CategoryListReducer (state = INITIAL_STATE, action: ICategoryListAction) {
   const {type, payload} = action;
 
   switch (type) {
-    case CATEGORY_LIST_AUTOCOMPLETE_GET_REQUEST:
+    case CATEGORY_LIST_GET_REQUEST:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        isForceUpdate: false,
       };
 
-    case CATEGORY_LIST_AUTOCOMPLETE_GET_SUCCESS:
-      const page = payload.data.meta.page;
-
+    case CATEGORY_LIST_GET_SUCCESS:
       return {
         ...state,
         list: payload.data.data,
-        pagination: {
-          total: page['total-items'],
-          number: page['current-page-number'],
-          size: page['current-page-size'],
-        },
+        params: metaToParams(payload.data.meta),
         isLoading: false,
         isLoaded: true,
       };
 
-    case CATEGORY_LIST_AUTOCOMPLETE_GET_FAILURE:
+    case CATEGORY_LIST_GET_FAILURE:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
       };
 
-    case PAGINATION:
+    case CATEGORY_LIST_PARAMS:
       return {
         ...state,
-        pagination: {...state.pagination, ...payload.pagination},
+        params: payload,
       };
 
-    case FILTER:
+    case CATEGORY_LIST_FORCE_UPDATE:
       return {
         ...state,
-        filter: {...state.filter, ...payload.filter},
+        isForceUpdate: true,
       };
 
     default:
@@ -82,55 +76,18 @@ export function CategoryListAutoCompleteReducer (state = INITIAL_STATE, action: 
 
 
 /** Action Creators */
-export const categoryListGet = ({pagination = {}, filter = {}, sort = {}}) => {
-  return (dispatch: any, getState: any) => {
-    dispatch({type: CATEGORY_LIST_AUTOCOMPLETE_GET_REQUEST, payload: {}});
+export const onParams = onParamsCreator(CATEGORY_LIST_PARAMS);
+export const forceUpdate = () => ({type: CATEGORY_LIST_FORCE_UPDATE, payload: {}});
 
-    const categoryList = getState().admin.categoryList;
-    const params = {
-      pagination: Object.assign({}, categoryList.pagination, pagination),
-      filter: Object.assign({}, categoryList.filter, filter),
-      sort: Object.assign({}, categoryList.sort, sort),
-    };
+export const categoryListGet = (params: IParams = {}, isReplaceLocation = false) => {
+  return (dispatch: any) => {
+    dispatch({type: CATEGORY_LIST_GET_REQUEST, payload: {}});
 
     return apiCategory.getCategoryList(params)
-      .then((response: AxiosResponse) => dispatch({type: CATEGORY_LIST_AUTOCOMPLETE_GET_SUCCESS, payload: response}))
-      .catch((error: AxiosError) => dispatch({type: CATEGORY_LIST_AUTOCOMPLETE_GET_FAILURE, payload: error}));
+      .then((response: AxiosResponse) => {
+        dispatch({type: CATEGORY_LIST_GET_SUCCESS, payload: response});
+        dispatch(onParams(metaToParams(response.data.meta), isReplaceLocation, true));
+      })
+      .catch((error: AxiosError) => dispatch({type: CATEGORY_LIST_GET_FAILURE, payload: error}));
   };
-};
-
-
-
-export function onPagination(payload: PaginationProps) {
-  return (dispatch: any, getState: any) => {
-    dispatch({
-      type: PAGINATION,
-      payload: {pagination: payload},
-    });
-
-    const location = getState().routing.locationBeforeTransitions;
-    dispatch(replaceLocationQuery(location, payload));
-  };
-}
-
-export function onFilter(payload: any) {
-  return (dispatch: any, getState: any) => {
-    dispatch({
-      type: FILTER,
-      payload: {filter: payload},
-    });
-
-    const location = getState().routing.locationBeforeTransitions;
-    dispatch(replaceLocationQuery(location, payload));
-  };
-}
-
-export const replaceLocationQuery = (location, query, force = false) => {
-  return replace({
-    ...location,
-    query: force ? query : {
-      ...location.query,
-      ...query,
-    },
-  });
 };

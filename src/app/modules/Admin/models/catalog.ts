@@ -1,6 +1,6 @@
-import {IPagination} from 'app/models/pagination';
 import {ICatalog} from './catalog';
 import {AxiosError} from "axios";
+import {IParams} from "../../../models/params";
 
 
 /* Catalog interfaces */
@@ -40,16 +40,12 @@ export interface ICatalogState {
 /* CatalogList interfaces */
 export interface ICatalogListAction {
   type: string;
-  payload?: {
-    list?: ICatalog[];
-    pagination?: IPagination;
-    error?: AxiosError;
-  };
+  payload?: any;
 }
 
 export interface ICatalogListState {
   list: ICatalog[];
-  pagination: IPagination;
+  params: IParams;
   isLoading: boolean;
   isLoaded: boolean;
 }

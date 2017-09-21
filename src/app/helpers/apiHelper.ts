@@ -20,7 +20,15 @@ export const objectToFilter = (filter: Object) => objectTo(filter, 'filter');
 export const objectToPage = (page: Object) => objectTo(page, 'page');
 
 
-export const queryToFPS = (query: any) => {
+
+export const paramsToApi = (params: any) => ({
+  ...objectToPage(params.pagination),
+  ...objectToFilter(params.filter),
+});
+
+
+// deprecated!!!
+export const queryToParams = (query: any) => {
   let pagination:any = {}, filter:any = {}, sort:any = {};
 
   query.number && (pagination.number = query.number);

@@ -16,18 +16,19 @@ import ProductListPage from '../pages/ProductListPage';
 import ProductCreatePage from '../pages/ProductCreatePage';
 
 /* Redux */
-import {categoryListGet, onPagination as onPaginationCategoryList, onFilter as onFilterCategoryList} from '../redux/categoryList';
-import {catalogListGet} from '../redux/catalogList';
+import categoryListRedux from '../redux/categoryList';
+import catalogListRedux from '../redux/catalogList';
 import {catalogGet} from '../redux/catalog';
 import {categoryGet} from '../redux/category';
 import {productGet} from '../redux/product';
-import {productListGet} from '../redux/prodictList';
+import productListRedux from '../redux/prodictList';
 
 /* Models */
 import {Store} from 'redux';
 import {IState} from 'models/store';
 
-import {queryToFPS} from '../../../helpers/apiHelper';
+import {queryToParams} from '../../../helpers/paramsHelper';
+
 
 export default (store: Store<IState>) => {
   const isClient = typeof window !== 'undefined';
@@ -41,7 +42,8 @@ export default (store: Store<IState>) => {
         path: 'catalog/list',
         component: CatalogListPage,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(catalogListGet()).then(() => callback());
+          const params = queryToParams(nextState.location.query);
+          store.dispatch(catalogListRedux.get(params)).then(() => callback());
         },
       },
       {
@@ -54,7 +56,7 @@ export default (store: Store<IState>) => {
         onEnter: (nextState: any, replace: any, callback: any) => {
           Promise.all([
             store.dispatch(catalogGet({id: nextState.params.id})),
-            store.dispatch(categoryListGet({filter: {catalog_id: nextState.params.id}}))
+            store.dispatch(categoryListRedux.get({filter: {catalog_id: nextState.params.id}}))
           ]).then(() => callback());
         },
       },
@@ -62,7 +64,8 @@ export default (store: Store<IState>) => {
         path: 'product/list',
         component: ProductListPage,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          store.dispatch(productListGet()).then(() => callback());
+          const params = queryToParams(nextState.location.query);
+          store.dispatch(productListRedux.get(params)).then(() => callback());
         },
       },
       {
@@ -80,12 +83,8 @@ export default (store: Store<IState>) => {
         path: 'category/list',
         component: CategoryListPage,
         onEnter: (nextState: any, replace: any, callback: any) => {
-          const params = queryToFPS(nextState.location.query);
-
-          // Object.keys(params.pagination).length && store.dispatch(onPaginationCategoryList(params.pagination));
-          // Object.keys(params.filter).length && store.dispatch(onFilterCategoryList(params.filter));
-
-          store.dispatch(categoryListGet(params)).then(() => callback());
+          const params = queryToParams(nextState.location.query);
+          store.dispatch(categoryListRedux.get(params)).then(() => callback());
         },
       },
       {

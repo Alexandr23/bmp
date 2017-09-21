@@ -3,10 +3,7 @@ import {ColumnProps} from "antd/lib/table/Column";
 import {Icon} from 'antd';
 import {ICategory} from "../../models/category";
 import {Link} from 'react-router';
-
-const style = require('./style.scss');
-const classNames = require('classnames/bind');
-const cx = classNames.bind(style);
+import {cx} from './index';
 
 
 export const columns: ColumnProps<any>[] = [
@@ -27,6 +24,12 @@ export const columns: ColumnProps<any>[] = [
     dataIndex: 'description',
     key: 'description',
     render: (text: string, record: ICategory) => <div>{record.attributes.description}</div>,
+  },
+  {
+    title: 'Каталог',
+    dataIndex: 'catalog_id',
+    key: 'catalog_id',
+    render: (text: string, record: ICategory) => <div>{record.attributes.catalog_id}</div>,
   },
   {
     title: 'Активен',

@@ -1,5 +1,5 @@
-import {IPagination} from '../../../models/pagination';
 import {AxiosError} from "axios";
+import {IParams} from "../../../models/params";
 
 
 /* Category interfaces */
@@ -45,9 +45,8 @@ export interface ICategoryListAction {
 
 export interface ICategoryListState {
   list: ICategory[];
+  params: IParams;
   isLoading: boolean;
   isLoaded: boolean;
-  pagination: IPagination;
-  filter?: any;
-  sort?: any;
+  isForceUpdate: boolean;
 }

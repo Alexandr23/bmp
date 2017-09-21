@@ -1,21 +1,21 @@
 import {combineReducers} from 'redux';
 import {CatalogReducer} from './catalog';
-import {CatalogListReducer} from './catalogList';
+import CatalogListRedux from './catalogList';
 import {CategoryReducer} from './category';
-import {CategoryListReducer} from './categoryList';
+import CategoryListRedux from './categoryList';
 import {ProductReducer} from './product';
-import {ProductListReducer} from './prodictList';
+import ProductListRedux from './prodictList';
 
 /* features */
-import {CategoryListAutoCompleteReducer} from '../features/CategoryListAutoComplete/redux';
+import {CategoryListReducer as CategoryListAutoComplete} from '../features/CategoryListAutoComplete/redux';
 
 
 export default combineReducers({
   catalog: CatalogReducer,
-  catalogList: CatalogListReducer,
+  catalogList: CatalogListRedux.Reducer,
   category: CategoryReducer,
-  categoryList: CategoryListReducer,
+  categoryList: CategoryListRedux.Reducer,
   product: ProductReducer,
-  productList: ProductListReducer,
-  categoryListAutoComplete: CategoryListAutoCompleteReducer,
+  productList: ProductListRedux.Reducer,
+  categoryListAutoComplete: CategoryListAutoComplete,
 });

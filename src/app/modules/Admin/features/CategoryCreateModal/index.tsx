@@ -3,7 +3,7 @@ const {PureComponent} = React;
 import {connect} from 'react-redux';
 import CategoryForm from '../../components/CategoryForm';
 import {categoryCreate} from '../../redux/category';
-import {categoryListGet} from '../../redux/categoryList';
+import categoryListRedux from '../../redux/categoryList';
 
 /* Ant Forms */
 import {message, Modal} from 'antd';
@@ -54,4 +54,4 @@ class CategoryCreateModal extends PureComponent<IProps> {
   }
 }
 
-export default (connect as any)(null, {categoryCreate, categoryListGet})(CategoryCreateModal);
+export default (connect as any)(null, {categoryCreate, categoryListGet: categoryListRedux.get})(CategoryCreateModal);

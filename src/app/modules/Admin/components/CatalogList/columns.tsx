@@ -3,10 +3,8 @@ import {ColumnProps} from "antd/lib/table/Column";
 import {Icon} from 'antd';
 import {ICatalog} from "../../models/catalog";
 import {Link} from 'react-router';
+import {cx} from './index';
 
-const style = require('./style.scss');
-const classNames = require('classnames/bind');
-const cx = classNames.bind(style);
 
 
 export const columns: ColumnProps<any>[] = [
@@ -22,12 +20,12 @@ export const columns: ColumnProps<any>[] = [
     key: 'name',
     render: (text: string, record: ICatalog) => <Link to={`/admin/catalog/${record.id}`}>{ record.attributes.name}</Link>,
   },
-  {
-    title: 'Описание',
-    dataIndex: 'description',
-    key: 'description',
-    render: (text: string, record: ICatalog) => record.attributes.description,
-  },
+  // {
+  //   title: 'Описание',
+  //   dataIndex: 'description',
+  //   key: 'description',
+  //   render: (text: string, record: ICatalog) => record.attributes.description,
+  // },
   {
     title: 'Активен',
     dataIndex: 'is_active',

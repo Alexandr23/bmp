@@ -1,5 +1,5 @@
 import request from '../../../services/request';
-import {objectToFilter} from '../../../helpers/apiHelper';
+import {paramsToApi} from '../../../helpers/apiHelper';
 
 
 /**
@@ -29,4 +29,4 @@ export const deleteCatalog = (id: string) => request.delete('catalogs/' + id);
 /**
  * Получение списка каталогов
  */
-export const getCatalogList = (filter?: Object) => request.get('catalogs', {params: objectToFilter(filter)});
+export const getCatalogList = (params?: any) => request.get('catalogs', {params: paramsToApi(params)});

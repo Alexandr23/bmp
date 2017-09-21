@@ -13,8 +13,8 @@ import {ICatalogState, ICatalog} from '../../models/catalog';
 import {ICategoryListState} from "../../models/category";
 import {IProductListState} from "../../models/product";
 import {catalogUpdate, catalogDelete} from '../../redux/catalog';
-import {productListGet} from '../../redux/prodictList';
-import {categoryListGet} from '../../redux/categoryList';
+import productListRedux from '../../redux/prodictList';
+import categoryListRedux from '../../redux/categoryList';
 
 /* AntDesign */
 import {Layout, Breadcrumb, Button, Input, Modal} from 'antd';
@@ -57,7 +57,7 @@ class CatalogPage extends PureComponent<IProps, IState> {
 
   onCategoryCreate = () => {
     this.categoryCreateModalClose();
-    this.props.categoryListGet({filter: this.props.catalog.data.id});
+    this.props.categoryListGet({filter: {catalog_id: this.props.catalog.data.id}});
   };
 
   componentDidMount () {
@@ -144,8 +144,16 @@ class CatalogPage extends PureComponent<IProps, IState> {
   }
 }
 
-export default (connect as any)((state: IStore) => ({
-  catalog: state.admin.catalog,
-  categoryList: state.admin.categoryList,
-  productList: state.admin.productList,
-}), {catalogUpdate, catalogDelete, productListGet, categoryListGet})(CatalogPage);
+export default (connect as any)(
+  (state: IStore) => ({
+    catalog: state.admin.catalog,
+    categoryList: state.admin.categoryList,
+    productList: state.admin.productList,
+  }),
+  {
+    catalogUpdate,
+    catalogDelete,
+    productListGet: productListRedux.get,
+    categoryListGet: categoryListRedux.get
+  }
+)(CatalogPage);

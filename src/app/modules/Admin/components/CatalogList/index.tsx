@@ -2,27 +2,48 @@ import * as React from 'react';
 const {PureComponent} = React;
 import {connect} from 'react-redux';
 import {ICatalog, ICatalogListState} from '../../models/catalog';
+import catalogListRedux from '../../redux/catalogList';
 import {IState} from "models/store";
+import {columns} from './columns';
+
+/* Styles */
+const style = require('./style.scss');
+const classNames = require('classnames/bind');
+export const cx = classNames.bind(style);
+
+/* AntDesign */
 import {Table} from 'antd';
 import {PaginationProps} from 'antd/lib/pagination';
-import {columns} from './columns';
-import './style.scss';
 
 
 interface IProps {
   catalogList: ICatalogListState;
+  catalogListGet: any;
 }
+
+
 class CatalogTable extends Table<ICatalog> {}
+class CatalogList extends PureComponent<IProps> {
+  onChange = (data) => {
+    const {params} = this.props.catalogList;
+    const newParams = {
+      ...params,
+      pagination: {
+        ...params.pagination,
+        number: data.current,
+        size: data.pageSize,
+      },
+    };
 
-
-class CatalogList extends PureComponent<IProps, null> {
-  props: IProps;
+    this.props.catalogListGet(newParams, true);
+  };
 
   public render () {
-    const {list} = this.props.catalogList;
+    const {list, params} = this.props.catalogList;
     const pagination:PaginationProps = {
-      total: list.length,
-      pageSize: 20,
+      current: params.pagination.number,
+      total: params.pagination.total,
+      pageSize: params.pagination.size,
       showSizeChanger: true,
       pageSizeOptions: ['10', '20', '50', '100'],
     };
@@ -32,7 +53,7 @@ class CatalogList extends PureComponent<IProps, null> {
 
     return (
       <div className="table">
-        <CatalogTable bordered dataSource={list.reverse()} columns={columns} size="small" pagination={pagination} />
+        <CatalogTable onChange={this.onChange} bordered dataSource={list} columns={columns} size="small" pagination={pagination} />
       </div>
     );
   }
@@ -42,4 +63,4 @@ class CatalogList extends PureComponent<IProps, null> {
 const mapStateToProps = (state: IState) => ({
   catalogList: state.admin.catalogList,
 });
-export default (connect as any)(mapStateToProps, {})(CatalogList);
+export default (connect as any)(mapStateToProps, {catalogListGet: catalogListRedux.get})(CatalogList);
