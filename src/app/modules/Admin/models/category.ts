@@ -20,6 +20,7 @@ export interface ICategory {
   links: any;
   relationships: any;
   key?: string;
+  sub?: Array<any>;
 }
 
 export interface ICategoryAction {

@@ -41,10 +41,26 @@ class CatalogCategoryTree extends PureComponent<IProps> {
   };
 
   public render () {
-    const categoryTree = this.props.categoryList.list.length ? this.props.categoryList.list.map(category => ({
-      id: category.id,
-      title: category.attributes.name
-    })) : CATEGORY_TREE;
+    const categoryList = this.props.categoryList.list;
+
+    let categoryTree = [...categoryList];
+
+    // console.log(categoryTree);
+    //
+    // categoryList.map((category, i) => {
+    //   const parentId = category.attributes.parent_id + '';
+    //   const parent = parentId ? categoryTree.filter(category => category.id == parentId)[0] : false;
+    //
+    //   console.log(`categoryId = ${category.id}, parentId = ${parentId}, parent = ${parent}`);
+    //
+    //   if (parent) {
+    //     parent.sub = parent.sub || [];
+    //     parent.sub.push(category);
+    //     categoryTree.splice(i, 1);
+    //   }
+    // });
+    //
+    // console.log(categoryTree);
 
     const defaultCategoryId = categoryTree[0].id;
 
@@ -67,7 +83,7 @@ class CatalogCategoryTree extends PureComponent<IProps> {
 const CategoryTitle = ({category}) => (
   <div className={cx('category')}>
     <div className={cx('category__image', `category__image_${category.id % 10 + 1}`)} />
-    <div className={cx('category__title')}>{category.title}</div>
+    <div className={cx('category__title')}>{category.attributes.parent_id ? category.attributes.parent_id + '_' : ''}{category.id}_{category.attributes.name}</div>
   </div>
 );
 
