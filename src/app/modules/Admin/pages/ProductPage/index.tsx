@@ -68,7 +68,7 @@ class ProductPage extends PureComponent<IProps, IState> {
           <div className={cx('content__header')}>
             <h1 className={cx('title')}>Товар "{isLoaded ? product.attributes.short_name : ''}"</h1>
             <Popconfirm title="Удалить товар?" onConfirm={this.productDelete} okText="Удалить" cancelText="Отмена" okType="danger">
-              <Button type="danger" icon="delete" ghost>Удалить</Button>
+              <Button size="small" type="danger" icon="delete" ghost>Удалить</Button>
             </Popconfirm>
           </div>
 

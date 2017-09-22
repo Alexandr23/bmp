@@ -17,7 +17,11 @@ export const columns: ColumnProps<any>[] = [
     title: 'Название',
     dataIndex: 'name',
     key: 'name',
-    render: (text: string, record: ICategory) => <div>{record.attributes.name}</div>,
+    render: (text: string, record: ICategory) => (
+      <Link to={'/admin/category/' + record.id}>
+        {record.attributes.name}
+      </Link>
+    ),
   },
   {
     title: 'Описание',
@@ -36,16 +40,5 @@ export const columns: ColumnProps<any>[] = [
     dataIndex: 'is_active',
     key: 'is_active',
     render: (text: string, record: ICategory) => <div>{record.attributes.is_active ? 'Да' : 'Нет'}</div>,
-  },
-  {
-    title: '',
-    dataIndex: 'edit',
-    key: 'edit',
-    width: '40px',
-    render: (text: string, record: ICategory) => (
-      <Link to={'/admin/category/' + record.id}>
-        <Icon type="edit" style={{width: '20px', height: '20px', fontSize: '18px'}} />
-      </Link>
-    )
   },
 ];

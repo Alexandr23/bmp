@@ -22,8 +22,8 @@ export const objectToPage = (page: Object) => objectTo(page, 'page');
 
 
 export const paramsToApi = (params: any) => ({
-  ...objectToPage(params.pagination),
-  ...objectToFilter(params.filter),
+  ...objectToPage(params.pagination || {}),
+  ...objectToFilter(params.filter || {}),
 });
 
 

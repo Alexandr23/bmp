@@ -57,6 +57,7 @@ class CategoryForm extends PureComponent<IProps, IState> {
 
   public render () {
     const { getFieldDecorator } = this.props.form;
+    const {category} = this.props;
 
     const dataSource = this.state.categoryList.map(category => ({
       value: category.id,
@@ -67,6 +68,7 @@ class CategoryForm extends PureComponent<IProps, IState> {
       <Form onSubmit={this.onSubmit} style={{maxWidth: '600px'}}>
         <FormItem label="Название" hasFeedback>
           {getFieldDecorator('name', {
+            initialValue: category ? category.data.attributes.name : '',
             rules: [{required: true, message: 'Введите название категории'}],
           })(
             <Input />
@@ -75,6 +77,7 @@ class CategoryForm extends PureComponent<IProps, IState> {
 
         <FormItem label="Описание" hasFeedback>
           {getFieldDecorator('description', {
+            initialValue: category ? category.data.attributes.description : '',
             rules: [{required: true, message: 'Введите описание категории'}],
           })(
             <TextArea autosize={{ minRows: 3, maxRows: 6 }} />
@@ -83,7 +86,7 @@ class CategoryForm extends PureComponent<IProps, IState> {
 
         <FormItem label="Каталог" hasFeedback>
           {getFieldDecorator('catalog_id', {
-            initialValue: this.props.catalogId || '',
+            initialValue: category ? category.data.attributes.catalog_id : (this.props.catalogId ? this.props.catalogId : ''),
             rules: [{required: true, message: 'Выберите каталог'}],
           })(
             <Input />
@@ -98,11 +101,11 @@ class CategoryForm extends PureComponent<IProps, IState> {
 
         <FormItem label="Активна">
           {getFieldDecorator('is_active', {
-            initialValue: false,
+            initialValue: category ? category.data.attributes.is_active : false,
             rules: [{required: true, message: 'Укажите активность категории'}],
           })
           (
-            <Switch defaultChecked={false} />
+            <Switch defaultChecked={category ? category.data.attributes.is_active : false} />
           )}
         </FormItem>
 

@@ -4,7 +4,7 @@ import CatalogListRedux from './catalogList';
 import {CategoryReducer} from './category';
 import CategoryListRedux from './categoryList';
 import {ProductReducer} from './product';
-import ProductListRedux from './prodictList';
+import ProductListRedux from './productList';
 
 /* features */
 import {CategoryListReducer as CategoryListAutoComplete} from '../features/CategoryListAutoComplete/redux';

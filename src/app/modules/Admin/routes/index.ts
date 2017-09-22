@@ -21,7 +21,7 @@ import catalogListRedux from '../redux/catalogList';
 import {catalogGet} from '../redux/catalog';
 import {categoryGet} from '../redux/category';
 import {productGet} from '../redux/product';
-import productListRedux from '../redux/prodictList';
+import productListRedux from '../redux/productList';
 
 /* Models */
 import {Store} from 'redux';

@@ -13,7 +13,7 @@ import {ICatalogState, ICatalog} from '../../models/catalog';
 import {ICategoryListState} from "../../models/category";
 import {IProductListState} from "../../models/product";
 import {catalogUpdate, catalogDelete} from '../../redux/catalog';
-import productListRedux from '../../redux/prodictList';
+import productListRedux from '../../redux/productList';
 import categoryListRedux from '../../redux/categoryList';
 
 /* AntDesign */
@@ -57,7 +57,13 @@ class CatalogPage extends PureComponent<IProps, IState> {
 
   onCategoryCreate = () => {
     this.categoryCreateModalClose();
-    this.props.categoryListGet({filter: {catalog_id: this.props.catalog.data.id}});
+    this.props.categoryListGet({
+      filter: {catalog_id: this.props.catalog.data.id},
+      pagination: {
+        number: 1,
+        size: 100,
+      },
+    });
   };
 
   componentDidMount () {

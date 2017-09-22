@@ -133,7 +133,7 @@ export function categoryGetSuccess(payload: AxiosResponse): ICategoryAction {
   return {
     type: CATEGORY_GET_SUCCESS,
     payload: {
-      data: payload.data,
+      data: payload.data.data,
     },
   };
 }
