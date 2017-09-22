@@ -93,9 +93,11 @@ class CategoryForm extends PureComponent<IProps, IState> {
           )}
         </FormItem>
 
-        <FormItem label="Родительская категория" hasFeedback>
-          {getFieldDecorator('parent_id')(
-            <CategoryListAutoComplete catalogId={this.props.catalogId} />
+        <FormItem label="Родительская категория">
+          {getFieldDecorator('parent_id', {
+            initialValue: category ? category.data.attributes.parent_id : '',
+          })(
+            <Input />
           )}
         </FormItem>
 

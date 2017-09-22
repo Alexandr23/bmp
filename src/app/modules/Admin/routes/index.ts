@@ -56,7 +56,10 @@ export default (store: Store<IState>) => {
         onEnter: (nextState: any, replace: any, callback: any) => {
           Promise.all([
             store.dispatch(catalogGet({id: nextState.params.id})),
-            store.dispatch(categoryListRedux.get({filter: {catalog_id: nextState.params.id}}))
+            store.dispatch(categoryListRedux.get({
+              filter: {catalog_id: nextState.params.id},
+              pagination: {size: 100, number: 1},
+            }))
           ]).then(() => callback());
         },
       },

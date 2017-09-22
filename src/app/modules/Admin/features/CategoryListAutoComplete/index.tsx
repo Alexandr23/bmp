@@ -8,11 +8,14 @@ import {IState as IStore} from 'models/store';
 /* Ant Forms */
 import {AutoComplete} from 'antd';
 
+// TODO: как отображать дефолтное значение?
 
 interface IProps {
   catalogId: number;
+  categoryId: any;
   categoryList: ICategoryListState;
   categoryListGet: any;
+  onChange?: any;
 }
 
 interface IState {
@@ -35,17 +38,31 @@ class CategoryListAutoComplete extends PureComponent<IProps, IState> {
     }
   }
 
+  componentWillMount () {
+    if (this.props.categoryId) {
+
+    }
+  }
+
   componentWillReceiveProps (newProps) {
     this.setState({
       categoryList: newProps.categoryList,
     });
   }
 
-  onSelect = (data) => {
-    console.log(data);
+  onSelect = (value) => {
+    console.log('onSelect = ', value);
+
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
   };
 
   onSearch = (query) => {
+    if (this.props.onChange) {
+      //this.props.onChange('');
+    }
+
     const params = {
       filter: {
         catalog_id: this.props.catalogId,
@@ -59,6 +76,7 @@ class CategoryListAutoComplete extends PureComponent<IProps, IState> {
   public render () {
     return (
       <AutoComplete
+        defaultValue={'asdfasdf'}
         dataSource={prepareCategoryList(this.props.categoryList.list)}
         onSelect={this.onSelect}
         onSearch={this.onSearch}
